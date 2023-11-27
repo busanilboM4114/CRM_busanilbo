@@ -1,0 +1,53 @@
+<div class="container">
+	<div class="title">
+		<h2 class="score-700 font-36">{$board_config.title}</h2>
+	</div>
+
+	<div class="board">
+		<div class="board-table">
+			<table>
+				<tbody>
+					<tr>
+						<td class="no font-18">No.</td>
+						<td class="board-title">
+							<p class="center font-18">제목</p>
+						</td>
+						<td class="name">
+							<p class="font-18">작성자</p>
+						</td>
+						<td class="date">
+							<p class="font-18">등록일</p>
+						</td>
+					</tr>
+					{section name=i loop=$L}
+					<tr>
+						<td class="no">{$L[i].no}</td>
+						<td class="board-title">
+							<a href="/html/board_view.php">
+								<p class="left font-18">{$L[i].title}</p>
+							</a>
+						</td>
+						<td class="name">
+							<p class="font-18">{$L[i].user_name}</p>
+						</td>
+						<td class="date">
+							<p class="font-18">{$L[i].reg_date[0]}</p>
+						</td>
+					</tr>
+					{sectionelse}
+					<tr>
+						<td colspan="4" class="">등록된 자료가 없습니다.</td>
+					</tr>
+					{/section}
+				</tbody>
+			</table>
+		</div>
+		<div class="margin-t-50 margin-b-100">
+			<div class="pagination">
+				<ul class="pagenum">
+					{$etc.pageclick}
+				</ul>
+			</div>
+		</div>
+	</div>
+</div>

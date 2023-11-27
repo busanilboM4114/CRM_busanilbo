@@ -1,0 +1,147 @@
+{literal}
+<script type="text/javascript">
+function view_article(idx)
+{
+	location.href=document.getElementById(idx).href;
+}
+
+function del()
+{
+	var f = document.form1;
+	var isChecked = false;
+	var obj = document.getElementsByName("isDel[]");
+	for(var i = 0 ; i < obj.length; i++)
+	{
+		if(document.getElementsByName('isDel[]')[i].checked==true)
+		{
+			isChecked=true;
+			break;
+		}
+	}
+
+	if(isChecked==false)
+	{
+		alert('삭제 대상을 선택하세요.');
+		return;
+	}
+	else
+	{
+		if(confirm('선택한 대상을 삭제하시겠습니까?'))
+		{
+			f.modes.value = "alldel";
+			f.submit();
+		}
+	}
+}
+
+// 전체선택/해제
+function total_check(bool)
+{
+	var obj = document.getElementsByName("isDel[]");
+	for (var i=0; i<obj.length; i++) obj[i].checked = bool;
+}
+
+function search_member_type(idx)
+{
+	$("#member_type").val(idx);
+	$("#searchform").submit();
+}
+</script>
+{/literal}
+
+<main class="content">
+	<div class="container-fluid p-0">
+
+		<h1 class="h3 mb-3">{$etc.board_title}</h1>
+
+		<div class="row">
+			<div class="col-12">
+				<div class="card">
+					<div class="card-body">
+						<div class="row">
+							<div class="col-4 col-md-4">
+								<form action="{$smarty.server.PHP_SELF}" method="get" name="searchform" id="searchform" class="p0 m0">
+									<input type="hidden" name="menu" value="{$etc.menu}">
+									<input type="hidden" name="tn" value="{$etc.tn}">
+									<input type="hidden" id="member_type" name="member_type" value="{$etc.member_type}">
+									<fieldset>
+										<div class="input-group">
+										<select name="search_select" id="search_select" class="form-select">
+											<option value="mb_id"{if $etc.search_select=='mb_id'} selected="selected"{/if}>아이디</option>
+											<option value="mb_name"{if $etc.search_select=='mb_name'} selected="selected"{/if}>이름</option>
+										</select>
+										<input name="keyword" id="keyword" type="text" class="form-control" title="키워드" value="{$etc.keyword}" alt="키워드" />
+										<button class="btn btn-secondary" type="submit"><i class="align-middle white" data-feather="search"></i> 검색</button>
+										</div>
+									</fieldset>
+								</form>
+							</div>
+							<div class="col-8 col-md-8 tar">
+								<button class="btn btn-secondary" onclick="search_member_type('1');">산</button>
+								<button class="btn btn-secondary" onclick="search_member_type('2');">낚시</button>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-12">
+				<div class="card">
+					<div class="card-body">
+						<table class="table table-striped">
+							<colgroup>
+								<col />
+								<col />
+								<col />
+								<col />
+								<col />
+								<col />
+								<col />
+								<col />
+								<col />
+							</colgroup>
+							<thead>
+								<tr>
+									<th class="tac">번호(회원키)</th>
+									<th class="tac">아이디</th>
+									<th class="tac">이름(닉네임)</th>
+									<th class="tac">구분</th>
+									<th class="tac">예약(건수)</th>
+									<th class="tac">최근예약제목</th>
+									<th class="tac">일자</th>
+									<th class="tac">인원</th>
+								</tr>
+							</thead>
+							{section name=i loop=$L}
+							<tr>
+								<td class="tac"><strong>{$L[i].no}</strong>({$L[i].mb_no})<a href="?menu={$etc.menu}&mode=read&idx={$L[i].mb_no}&tn={$etc.tn}&pagenum={$etc.pagenum}&search_select={$etc.search_select}&keyword={$etc.keyword}&category_idx={$etc.category_idx}" id="article_{$L[i].mb_no}"></a></td>
+								<td class="tac">{$L[i].mb_id}</td>
+								<td class="tac">{$L[i].mb_name}({$L[i].mb_nick})</td>
+								<td class="tac"></td>
+							</tr>
+							{sectionelse}
+							<tr>
+								<td class="p10 tac" colspan="9">등록된 자료가 없습니다.</td>
+							</tr>
+							{/section}
+						</table>
+					</div>
+					<div class="card-footer">
+						<div class="dataTables_wrapper dt-bootstrap5">
+							<div class="row">
+								<div class="col-18">
+									<div class="dataTables_paginate paging_simple_numbers" id="datatables-buttons_paginate">
+										<ul class="pagination">
+											{$etc.pageclick}
+										</ul>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</main>

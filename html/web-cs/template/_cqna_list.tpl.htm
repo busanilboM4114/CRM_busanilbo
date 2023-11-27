@@ -1,0 +1,60 @@
+<div class="container">
+	<div class="title">
+		<h2 class="score-700 font-36">{$board_config.title}</h2>
+	</div>
+
+	<div class="board">
+		<div class="board-inquiry board-table">
+			<div class="table_list">
+				<table>
+					<tbody>
+						{section name=i loop=$L}
+						<tr>
+							<td class="no">{$L[i].no}</td>
+							<td class="title">
+								<a href="view-02.php">
+									<p class="left font-18 black flex align-center">{$L[i].title}</p>
+									<p class="left gray font-14 margin-t-5">
+										성형<span class="margin-r-5"></span>｜<span class="margin-r-5"></span>
+										t***<span class="margin-r-5"></span>｜<span class="margin-r-5"></span>
+										{$L[i].reg_date[0]}
+									</p>
+								</a>
+							</td>
+							<td class="date">
+								{if $L[i].re_contents}
+								<div class="inquiry-status done">답변완료</div>
+								{else}
+								<div class="inquiry-status wait">상담 대기</div>
+								{/if}
+							</td>
+						</tr>
+						{sectionelse}
+						<tr>
+							<td colspan="3">등록된 자료가 없습니다.</td>
+						</tr>
+						{/section}
+					</tbody>
+				</table>
+			</div>
+		</div>
+		<div class="button-medium board-inquiry-button right margin-t-30">
+			<a href="write.php" class="bg-black white">글쓰기</a>
+		</div>
+		<div class="margin-t-50">
+			<div class="pagination">
+				<ul class="pagenum">
+					{$etc.pageclick}
+				</ul>
+			</div>
+		</div>
+		<div class="board-search margin-t-30 margin-b-100 center">
+			<form name="board-searchform" class="flex align-center justify-center" id="board-searchform">
+				<input type="hidden" name="board_idx" value="{$etc.board_idx}" />
+				<input type="hidden" name="search_select" value="all" />
+				<input name="keyword" id="keyword" type="text" class="text" value="{$etc.keyword}" title="검색어를 입력해 주세요">
+				<input type="submit" class="board-search-button" value="">
+			</form>
+		</div>
+	</div>
+</div>

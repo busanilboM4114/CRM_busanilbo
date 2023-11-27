@@ -1,0 +1,38 @@
+@font-face {
+    font-family: 'Nanum-square';
+    src: url('/share/fonts/nanumsquarer.eot');
+    src: url('/share/fonts/nanumsquarer.eot?#iefix') format('embedded-opentype'),
+         url('/share/fonts/nanumsquarer.woff2') format('woff2'),
+         url('/share/fonts/nanumsquarer.woff') format('woff'),
+         url('/share/fonts/nanumsquarer.ttf') format('truetype'),
+         url('/share/fonts/nanumsquarer.svg#nanumsquarerregular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+.preview_wrap * {font-family:'Nanum-Square', '¸¼Àº °íµñ', Arial, 'µ¸¿ò', 'Helvetica', 'Helvetica Neue', dotum, AppleGothic, sans-serif; font-size:16px; line-height:1.6; color:#333; box-sizing:border-box;}
+.preview_wrap .pdt_30 {padding-top:30px;}
+.preview_wrap .w_50p {width:50%;}
+.preview_wrap .w_90p {width:90%;}
+.preview_wrap .dpb {display:block;}
+.preview_wrap .fwb {font-weight:bold;}
+.preview_wrap .w_100p {width:100%;}
+.preview_wrap .cf::after {clear: both; display: block; content: "";}
+.preview_wrap .fs18 {font-size:18px;}
+.preview_wrap .fc_666 {color:#666;}
+.preview_wrap .mgb_10 {margin-bottom:10px;}
+.preview_wrap .mgb_30 {margin-bottom:30px;}
+.preview_wrap .mgr_10 {margin-right:10px;}
+.preview_wrap .mgb_20 {margin-bottom:20px;}
+.preview_wrap .ls_1 {letter-spacing:-1px;}
+.preview_wrap .dpt {display:table;}
+.preview_wrap .dptc {display:table-cell;}
+.preview_wrap .pdt_45p {padding-top:45%;}
+.preview_wrap .re {position:relative;}
+.preview_wrap .ab {position:absolute;}
+.preview_wrap .bg_f5 {background-color:#f5f5f5;}
+.preview_wrap .pd_20 {padding:20px;}
+.preview_wrap .mgl_20 {margin-left:20px;}
+.preview_wrap .mgt_20 {margin-top:20px;}
+.preview_wrap .border_b {border-bottom:1px solid #ddd;}
+.preview_wrap .pop-layer6 {max-width:690px !Important; padding:40px !important; border:2px solid #333;}

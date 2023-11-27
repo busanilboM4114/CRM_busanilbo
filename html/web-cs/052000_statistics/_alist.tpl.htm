@@ -1,0 +1,212 @@
+			<main class="content">
+				<div class="container-fluid p-0">
+
+					<div class="row mb-2 mb-xl-3">
+						<div class="col-auto d-none d-sm-block">
+							<h3><strong>{$etc.board_title}</strong></h3>
+						</div>
+					</div>
+
+					<div class="row">
+						<div class="col-12">
+							<div class="card">
+								<div class="card-body">
+									<div class="col-4">
+										<div class="input-group">
+											<input type="text" id="start_date" name="start_date" value="" class="form-control flatpickr-minimum" placeholder="Select date.." />
+											<input type="text" id="end_date" name="end_date" value="" class="form-control flatpickr-minimum" placeholder="Select date.." />
+											<button type="button" onclick="" class="btn btn-secondary">검색</button>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<div class="row">
+						<div class="col-12 col-xl-8">
+							<div class="card flex-fill w-100">
+								<div class="card-header">
+									<h5 class="card-title mb-0 pb3 pt5">콘텐츠 통계</h5>
+								</div>
+								<div class="card-body pt-2 pb-3">
+									<div class="chart chart-sm">
+										<canvas id="chartjs-dashboard-line"></canvas>
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<div class="col-12 col-xl-4">
+							<div class="card flex-fill w-100">
+								<div class="card-header">
+									<h5 class="card-title mb-0 pb3 pt5">콘텐츠 백분위 통계</h5>
+								</div>
+								<div class="card-body pt-2 pb-3">
+									<div class="chart chart-sm">
+										<canvas id="chartjs-dashboard-daily-line"></canvas>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<div class="row">
+						<div class="col-12 col-xl-6">
+							<div class="card">
+								<div class="card-header">
+									<h5 class="card-title">상위 5개 콘텐츠</h5>
+								</div>
+								<table class="table table-striped">
+									<thead>
+										<tr>
+											<th style="width:25%;">카테고리</th>
+											<th style="width:75%">제목</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr>
+											<td>산&</td>
+											<td>금정산</td>
+										</tr>
+										<tr>
+											<td>낚시&</td>
+											<td>송정</td>
+										</tr>
+										<tr>
+											<td>산&</td>
+											<td>승학산</td>
+										</tr>
+										<tr>
+											<td>맛집&</td>
+											<td>할매국밥</td>
+										</tr>
+										<tr>
+											<td>낚시&</td>
+											<td>이기대</td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+						</div>
+
+						<div class="col-12 col-xl-6">
+							<div class="card">
+								<div class="card-header">
+									<h5 class="card-title">하위 5개 콘텐츠</h5>
+								</div>
+								<table class="table table-striped">
+									<thead>
+										<tr>
+											<th style="width:25%;">카테고리</th>
+											<th style="width:75%">제목</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr>
+											<td>들&</td>
+											<td>김해평야</td>
+										</tr>
+										<tr>
+											<td>길&</td>
+											<td>갈맷길</td>
+										</tr>
+										<tr>
+											<td>낚시&</td>
+											<td>청사포낚시</td>
+										</tr>
+										<tr>
+											<td>길&</td>
+											<td>수영강산책로</td>
+										</tr>
+										<tr>
+											<td>들&</td>
+											<td>부산항 오토캠핑장</td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+						</div>
+					</div>
+
+				</div>
+			</main>
+
+			{literal}
+			<script>
+			document.addEventListener("DOMContentLoaded", function() {
+				// Bar chart
+				new Chart(document.getElementById("chartjs-dashboard-line"), {
+					type: "bar",
+					data: {
+						labels: ["산&", "길&", "들&", "낚시&", "맛&"],
+						datasets: [{
+							backgroundColor: window.theme.primary,
+							borderColor: window.theme.primary,
+							data: [78, 52, 42, 63, 62],
+							barPercentage: .85,
+							categoryPercentage: .5
+						}]
+					},
+					options: {
+						maintainAspectRatio: false,
+						legend: {
+							display: false
+						},
+						scales: {
+							yAxes: [{
+								gridLines: {
+									display: false
+								},
+								stacked: false,
+								ticks: {
+									stepSize: 20
+								}
+							}],
+							xAxes: [{
+								stacked: false,
+								gridLines: {
+									color: "transparent"
+								}
+							}]
+						}
+					}
+				});
+			});
+			</script>
+
+			<script>
+			document.addEventListener("DOMContentLoaded", function() {
+				// Pie chart
+				new Chart(document.getElementById("chartjs-dashboard-daily-line"), {
+					type: "pie",
+					data: {
+						labels: ["산&", "길&", "들&", "낚시&", "맛&"],
+						datasets: [{
+							label: "비율(%)",
+							data: [30, 12, 10, 24, 22],
+							backgroundColor: [
+								window.theme.primary,
+								window.theme.warning,
+								window.theme.secondary,
+								window.theme.success,
+								window.theme.info
+							],
+							borderColor: "transparent"
+						}]
+					},
+					options: {
+						responsive: !window.MSInputMethodContext,
+						maintainAspectRatio: false
+					}
+				});
+			});
+			</script>
+
+			<script>
+				document.addEventListener("DOMContentLoaded", function() {
+					// Flatpickr
+					flatpickr(".flatpickr-minimum");
+				});
+			</script>
+			{/literal}

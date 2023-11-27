@@ -1,0 +1,475 @@
+			<main class="content">
+				<div class="container-fluid p-0">
+
+					<div class="row mb-2 mb-xl-3">
+						<div class="col-auto d-none d-sm-block">
+							<h3><strong>{$etc.board_title}</strong></h3>
+						</div>
+					</div>
+
+					<div class="row">
+						<div class="col-12 col-xl-6">
+							<div class="card flex-fill w-100">
+								<div class="card-header">
+									<h5 class="card-title mb-0 pb3 pt5">월별 가입/탈퇴 현황 통계</h5>
+								</div>
+								<div class="card-body pt-2 pb-3">
+									<div class="chart chart-sm">
+										<canvas id="chartjs_month_join_withdraw_line"></canvas>
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<div class="col-12 col-xl-6">
+							<div class="card flex-fill w-100">
+								<div class="card-header">
+									<h5 class="card-title mb-0 pb3 pt5">년도별 가입/탈퇴 현황 통계</h5>
+								</div>
+								<div class="card-body pt-2 pb-3">
+									<div class="chart chart-sm">
+										<canvas id="chartjs_year_join_withdraw_line"></canvas>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<div class="row">
+						<div class="col-12">
+							<div class="card">
+								<div class="card-body">
+									<div class="col-4 col-md-4">
+										<form action="{$smarty.server.PHP_SELF}" method="get" name="searchform" id="searchform" class="p0 m0">
+											<input type="hidden" name="menu" value="{$etc.menu}">
+											<input type="hidden" name="tn" value="{$etc.tn}">
+											<fieldset>
+												<div class="input-group">
+													<input type="text" id="start_date" name="start_date" value="{$etc.start_date}" class="form-control flatpickr-minimum" placeholder="Select date.." />
+													<input type="text" id="end_date" name="end_date" value="{$etc.end_date}" class="form-control flatpickr-minimum" placeholder="Select date.." />
+													<button type="submit" class="btn btn-secondary">검색</button>
+												</div>
+											</fieldset>
+										</form>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<div class="row">
+						<div class="col-12 col-xl-4">
+							<div class="card flex-fill w-100">
+								<div class="card-header">
+									<h5 class="card-title mb-0 pb3 pt5">지역별 회원 통계(%)</h5>
+								</div>
+								<div class="card-body pt-2 pb-3">
+									<div class="chart">
+										<canvas id="chartjs-area"></canvas>
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<div class="col-12 col-xl-4">
+							<div class="card flex-fill w-100">
+								<div class="card-header">
+									<h5 class="card-title mb-0 pb3 pt5">연령대별 회원 통계(%)</h5>
+								</div>
+								<div class="card-body pt-2 pb-3">
+									<div class="chart">
+										<canvas id="chartjs-age"></canvas>
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<div class="col-12 col-xl-4">
+							<div class="card flex-fill w-100">
+								<div class="card-header">
+									<h5 class="card-title mb-0 pb3 pt5">성별 통계(%)</h5>
+								</div>
+								<div class="card-body pt-2 pb-3">
+									<div class="chart">
+										<canvas id="chartjs-sex"></canvas>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<div class="row">
+						<div class="col-12 col-xl-6">
+							<div class="card">
+								<div class="card-header">
+									<h5 class="card-title">최근 가입 회원</h5>
+								</div>
+								<table class="table table-striped">
+									<thead>
+										<tr>
+											<th style="width:50%;">아이디</th>
+											<th style="width:25%">이름</th>
+											<th style="width:25%">지역</th>
+										</tr>
+									</thead>
+									<tbody>
+										{section name=i loop=$new_member}
+										<tr>
+											<td>{$new_member[i].mb_id}</td>
+											<td>{$new_member[i].mb_name}</td>
+											<td>{$new_member[i].mb_addr1}</td>
+										</tr>
+										{/section}
+									</tbody>
+								</table>
+							</div>
+						</div>
+
+						<div class="col-12 col-xl-6">
+							<div class="card">
+								<div class="card-header">
+									<h5 class="card-title">최근 탈퇴 회원</h5>
+								</div>
+								<table class="table table-striped">
+									<thead>
+										<tr>
+											<th style="width:100%;">아이디</th>
+										</tr>
+									</thead>
+									<tbody>
+										{section name=i loop=$leave_member}
+										<tr>
+											<td>{$leave_member[i].mb_id}</td>
+										</tr>
+										{/section}
+									</tbody>
+								</table>
+							</div>
+						</div>
+					</div>
+
+				</div>
+			</main>
+
+			{literal}
+			<script>
+			document.addEventListener("DOMContentLoaded", function() {
+				// Line chart
+				new Chart(document.getElementById("chartjs_month_join_withdraw_line"), {
+					type: "line",
+					data: {
+						labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+						datasets: [{
+							label: "가입(명)",
+							fill: false,
+							borderColor: window.theme.primary,
+							data: [
+								{/literal}
+								{section name=i loop=$month_join_member_cnt}
+								{$month_join_member_cnt[i].cnt}
+								{if !$smarty.section.i.last}
+								,
+								{/if}
+								{/section}
+								{literal}
+							]
+						}, {
+							label: "탈퇴(명)",
+							fill: false,
+							borderColor: window.theme.danger,
+							data: [
+								{/literal}
+								{section name=i loop=$month_withdraw_member_cnt}
+								{$month_withdraw_member_cnt[i].cnt}
+								{if !$smarty.section.i.last}
+								,
+								{/if}
+								{/section}
+								{literal}
+							]
+						}]
+					},
+					options: {
+						maintainAspectRatio: false,
+						legend: {
+							display: false
+						},
+						tooltips: {
+							intersect: false
+						},
+						hover: {
+							intersect: true
+						},
+						plugins: {
+							filler: {
+								propagate: false
+							}
+						},
+						scales: {
+							xAxes: [{
+								reverse: true,
+								gridLines: {
+									color: "rgba(0,0,0,0.0)"
+								}
+							}],
+							yAxes: [{
+								ticks: {
+									stepSize: 1000
+								},
+								display: true,
+								borderDash: [3, 3],
+								gridLines: {
+									color: "rgba(0,0,0,0.0)",
+									fontColor: "#fff"
+								}
+							}]
+						}
+					}
+				});
+			});
+			</script>
+
+			<script>
+			document.addEventListener("DOMContentLoaded", function() {
+				// Line chart
+				new Chart(document.getElementById("chartjs_year_join_withdraw_line"), {
+					type: "line",
+					data: {
+						labels: [
+							{/literal}
+							{section name=i loop=$previous_year}
+							"{$previous_year[i].year}년"
+							{if !$smarty.section.i.last}
+							,
+							{/if}
+							{/section}
+							{literal}
+						],
+						datasets: [{
+							label: "가입(명)",
+							fill: false,
+							borderColor: window.theme.primary,
+							data: [
+								{/literal}
+								{section name=i loop=$year_join_member_cnt}
+								{$year_join_member_cnt[i].cnt}
+								{if !$smarty.section.i.last}
+								,
+								{/if}
+								{/section}
+								{literal}
+							]
+						}, {
+							label: "탈퇴(명)",
+							fill: false,
+							borderColor: window.theme.danger,
+							data: [
+								{/literal}
+								{section name=i loop=$year_withdraw_member_cnt}
+								{$year_withdraw_member_cnt[i].cnt}
+								{if !$smarty.section.i.last}
+								,
+								{/if}
+								{/section}
+								{literal}
+							]
+						}]
+					},
+					options: {
+						maintainAspectRatio: false,
+						legend: {
+							display: false
+						},
+						tooltips: {
+							intersect: false
+						},
+						hover: {
+							intersect: true
+						},
+						plugins: {
+							filler: {
+								propagate: false
+							}
+						},
+						scales: {
+							xAxes: [{
+								reverse: true,
+								gridLines: {
+									color: "rgba(0,0,0,0.0)"
+								}
+							}],
+							yAxes: [{
+								ticks: {
+									stepSize: 1000
+								},
+								display: true,
+								borderDash: [3, 3],
+								gridLines: {
+									color: "rgba(0,0,0,0.0)",
+									fontColor: "#fff"
+								}
+							}]
+						}
+					}
+				});
+			});
+			</script>
+
+			<script>
+			document.addEventListener("DOMContentLoaded", function() {
+				// Pie chart
+				new Chart(document.getElementById("chartjs-area"), {
+					type: "pie",
+					data: {
+						labels: [
+							{/literal}
+							{section name=i loop=$area}
+							"{$area[i].area}"
+							{if !$smarty.section.i.last}
+							,
+							{/if}
+							{/section}
+							{literal}
+						],
+						datasets: [{
+							data: [
+								{/literal}
+								{section name=i loop=$area_member_cnt}
+								{$area_member_cnt[i].percent}
+								{if !$smarty.section.i.last}
+								,
+								{/if}
+								{/section}
+								{literal}
+							],
+							backgroundColor: [
+								window.theme.primary,
+								window.theme.warning,
+								window.theme.secondary,
+								"#E8EAED",
+								window.theme.success,
+								window.theme.info,
+								"#98EAED",
+								"#E85AED",
+								window.theme.primary,
+								window.theme.warning,
+								window.theme.secondary,
+								"#E8EAED",
+								window.theme.success,
+								window.theme.info,
+								"#98EAED",
+								"#E85AED",
+								window.theme.info
+							],
+							borderColor: "transparent"
+						}]
+					},
+					options: {
+						responsive: !window.MSInputMethodContext,
+						maintainAspectRatio: false,
+						legend: {
+							align: "start"
+						}
+					}
+				});
+			});
+			</script>
+
+			<script>
+			document.addEventListener("DOMContentLoaded", function() {
+				// Pie chart
+				new Chart(document.getElementById("chartjs-age"), {
+					type: "pie",
+					data: {
+						labels: [
+							{/literal}
+							{section name=i loop=$age_member_cnt}
+							"{$age_member_cnt[i].age_group}"
+							{if !$smarty.section.i.last}
+							,
+							{/if}
+							{/section}
+							{literal}
+						],
+						datasets: [{
+							data: [
+								{/literal}
+								{section name=i loop=$age_member_cnt}
+								{$age_member_cnt[i].percent}
+								{if !$smarty.section.i.last}
+								,
+								{/if}
+								{/section}
+								{literal}
+							],
+							backgroundColor: [
+								window.theme.primary,
+								window.theme.warning,
+								window.theme.secondary,
+								"#E85A7D",
+								window.theme.success,
+								window.theme.info
+							],
+							borderColor: "transparent"
+						}]
+					},
+					options: {
+						responsive: !window.MSInputMethodContext,
+						maintainAspectRatio: false,
+						legend: {
+							align: "start"
+						}
+					}
+				});
+			});
+			</script>
+
+			<script>
+			document.addEventListener("DOMContentLoaded", function() {
+				// Pie chart
+				new Chart(document.getElementById("chartjs-sex"), {
+					type: "pie",
+					data: {
+						labels: [
+							{/literal}
+							{section name=i loop=$sex_member_cnt}
+							"{$sex_member_cnt[i].name}"
+							{if !$smarty.section.i.last}
+							,
+							{/if}
+							{/section}
+							{literal}
+						],
+						datasets: [{
+							data: [
+								{/literal}
+								{section name=i loop=$sex_member_cnt}
+								{$sex_member_cnt[i].percent}
+								{if !$smarty.section.i.last}
+								,
+								{/if}
+								{/section}
+								{literal}
+							],
+							backgroundColor: [
+								window.theme.primary,
+								window.theme.warning
+							],
+							borderColor: "transparent"
+						}]
+					},
+					options: {
+						responsive: !window.MSInputMethodContext,
+						maintainAspectRatio: false
+					}
+				});
+			});
+			</script>
+
+			<script>
+				document.addEventListener("DOMContentLoaded", function() {
+					// Flatpickr
+					flatpickr(".flatpickr-minimum");
+				});
+			</script>
+			{/literal}

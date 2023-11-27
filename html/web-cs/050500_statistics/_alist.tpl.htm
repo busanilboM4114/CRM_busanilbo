@@ -1,0 +1,293 @@
+			<main class="content">
+				<div class="container-fluid p-0">
+
+					<div class="row mb-2 mb-xl-3">
+						<div class="col-auto d-none d-sm-block">
+							<h3><strong>{$etc.board_title}</strong></h3>
+						</div>
+					</div>
+
+					<div class="row">
+						<div class="col-12">
+							<div class="card">
+								<div class="card-body">
+									<div class="col-4">
+										<div class="input-group">
+											<input type="text" id="start_date" name="start_date" value="" class="form-control flatpickr-minimum" placeholder="Select date.." />
+											<input type="text" id="end_date" name="end_date" value="" class="form-control flatpickr-minimum" placeholder="Select date.." />
+											<button type="button" onclick="" class="btn btn-secondary">검색</button>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<div class="row">
+						<div class="col-12 col-xl-6">
+							<div class="card flex-fill w-100">
+								<div class="card-header">
+									<h5 class="card-title mb-0 pb3 pt5">월별 로그인 그래프</h5>
+								</div>
+								<div class="card-body pt-2 pb-3">
+									<div class="chart chart-sm">
+										<canvas id="chartjs-dashboard-line"></canvas>
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<div class="col-12 col-xl-6">
+							<div class="card flex-fill w-100">
+								<div class="card-header">
+									<h5 class="card-title mb-0 pb3 pt5">일별 로그인 그래프</h5>
+								</div>
+								<div class="card-body pt-2 pb-3">
+									<div class="chart chart-sm">
+										<canvas id="chartjs-dashboard-daily-line"></canvas>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<div class="row">
+						<div class="col-12 col-xl-6">
+							<div class="card flex-fill w-100">
+								<div class="card-header">
+									<h5 class="card-title mb-0 pb3 pt5">시간대별 로그인 그래프</h5>
+								</div>
+								<div class="card-body pt-2 pb-3">
+									<div class="chart chart-sm">
+										<canvas id="chartjs-time-pie"></canvas>
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<div class="col-12 col-xl-6">
+							<div class="card flex-fill w-100">
+								<div class="card-header">
+									<h5 class="card-title mb-0 pb3 pt5">요일별 로그인 그래프</h5>
+								</div>
+								<div class="card-body pt-2 pb-3">
+									<div class="chart chart-sm">
+										<canvas id="chartjs-dayofweek-pie"></canvas>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</main>
+
+			{literal}
+			<script>
+			document.addEventListener("DOMContentLoaded", function() {
+				var ctx = document.getElementById("chartjs-dashboard-line").getContext("2d");
+				var gradientLight = ctx.createLinearGradient(0, 0, 0, 225);
+				gradientLight.addColorStop(0, "rgba(215, 227, 244, 1)");
+				gradientLight.addColorStop(1, "rgba(215, 227, 244, 0)");
+				var gradientDark = ctx.createLinearGradient(0, 0, 0, 225);
+				gradientDark.addColorStop(0, "rgba(51, 66, 84, 1)");
+				gradientDark.addColorStop(1, "rgba(51, 66, 84, 0)");
+				// Line chart
+				new Chart(document.getElementById("chartjs-dashboard-line"), {
+					type: "line",
+					data: {
+						labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+						datasets: [{
+							fill: true,
+							backgroundColor: window.theme.id === "light" ? gradientLight : gradientDark,
+							borderColor: window.theme.primary,
+							data: [
+								211,
+								156,
+								158,
+								189,
+								158,
+								192,
+								256,
+								244,
+								280,
+								343,
+								291,
+								332
+							]
+						}]
+					},
+					options: {
+						maintainAspectRatio: false,
+						legend: {
+							display: false
+						},
+						tooltips: {
+							intersect: false
+						},
+						hover: {
+							intersect: true
+						},
+						plugins: {
+							filler: {
+								propagate: false
+							}
+						},
+						scales: {
+							xAxes: [{
+								reverse: true,
+								gridLines: {
+									color: "rgba(0,0,0,0.0)"
+								}
+							}],
+							yAxes: [{
+								ticks: {
+									stepSize: 1000
+								},
+								display: true,
+								borderDash: [3, 3],
+								gridLines: {
+									color: "rgba(0,0,0,0.0)",
+									fontColor: "#fff"
+								}
+							}]
+						}
+					}
+				});
+			});
+			</script>
+
+			<script>
+			document.addEventListener("DOMContentLoaded", function() {
+				var ctx = document.getElementById("chartjs-dashboard-daily-line").getContext("2d");
+				var gradientLight = ctx.createLinearGradient(0, 0, 0, 225);
+				gradientLight.addColorStop(0, "rgba(215, 127, 244, 1)");
+				gradientLight.addColorStop(1, "rgba(215, 127, 244, 0)");
+				var gradientDark = ctx.createLinearGradient(0, 0, 0, 225);
+				gradientDark.addColorStop(0, "rgba(51, 96, 84, 1)");
+				gradientDark.addColorStop(1, "rgba(51, 96, 84, 0)");
+				// Line chart
+				new Chart(document.getElementById("chartjs-dashboard-daily-line"), {
+					type: "line",
+					data: {
+						labels: ["14일", "15일", "16일", "17일", "18일", "19일", "20일"],
+						datasets: [{
+							fill: true,
+							backgroundColor: window.theme.id === "light" ? gradientLight : gradientDark,
+							borderColor: window.theme.primary,
+							data: [
+								21,
+								16,
+								18,
+								19,
+								18,
+								12,
+								26
+							]
+						}]
+					},
+					options: {
+						maintainAspectRatio: false,
+						legend: {
+							display: false
+						},
+						tooltips: {
+							intersect: false
+						},
+						hover: {
+							intersect: true
+						},
+						plugins: {
+							filler: {
+								propagate: false
+							}
+						},
+						scales: {
+							xAxes: [{
+								reverse: true,
+								gridLines: {
+									color: "rgba(0,0,0,0.0)"
+								}
+							}],
+							yAxes: [{
+								ticks: {
+									stepSize: 1000
+								},
+								display: true,
+								borderDash: [3, 3],
+								gridLines: {
+									color: "rgba(0,0,0,0.0)",
+									fontColor: "#fff"
+								}
+							}]
+						}
+					}
+				});
+			});
+			</script>
+
+			<script>
+			document.addEventListener("DOMContentLoaded", function() {
+				// Pie chart
+				new Chart(document.getElementById("chartjs-time-pie"), {
+					type: "pie",
+					data: {
+						labels: ["0시~3시", "3시~6시", "6시~9시", "9시~12시", "12시~15시", "15시~18시", "18시~21시", "21시~24시"],
+						datasets: [{
+							data: [60, 25, 54, 76, 56, 34, 54, 96],
+							backgroundColor: [
+								window.theme.primary,
+								window.theme.warning,
+								window.theme.secondary,
+								"#E8EAED",
+								window.theme.success,
+								window.theme.info,
+								"#98EAED",
+								"#E85AED"
+							],
+							borderColor: "transparent"
+						}]
+					},
+					options: {
+						responsive: !window.MSInputMethodContext,
+						maintainAspectRatio: false
+					}
+				});
+			});
+			</script>
+
+			<script>
+			document.addEventListener("DOMContentLoaded", function() {
+				// Pie chart
+				new Chart(document.getElementById("chartjs-dayofweek-pie"), {
+					type: "pie",
+					data: {
+						labels: ["월", "화", "수", "목", "금", "토", "일"],
+						datasets: [{
+							data: [360, 125, 254, 176, 260, 125, 154],
+							backgroundColor: [
+								window.theme.primary,
+								window.theme.warning,
+								window.theme.secondary,
+								"#E8EAED",
+								window.theme.success,
+								window.theme.info,
+								"#98EAED"
+							],
+							borderColor: "transparent"
+						}]
+					},
+					options: {
+						responsive: !window.MSInputMethodContext,
+						maintainAspectRatio: false
+					}
+				});
+			});
+			</script>
+
+			<script>
+				document.addEventListener("DOMContentLoaded", function() {
+					// Flatpickr
+					flatpickr(".flatpickr-minimum");
+				});
+			</script>
+			{/literal}

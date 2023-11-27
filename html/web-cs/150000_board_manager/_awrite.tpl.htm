@@ -1,0 +1,273 @@
+{literal}
+<script type="text/javascript">
+function writeform_chk(obj)
+{
+	flag=frm_chk(obj);
+	if(flag)
+	{
+		if(parseInt($("#file_count").val())>5)
+		{
+			alert('첨부파일은 5개까지 가능합니다.');
+			$("#file_count").focus();
+			return false;
+		}
+		return true;
+	}
+	else
+	{
+		return false;
+	}
+}
+
+var fields_count={/literal}{if $etc.mode=='write'}0{else}{$L.addition_fields_cnt}{/if}{literal};
+
+function fields_add()
+{
+	if(fields_count>=10)
+	{
+		alert('필드 추가는 10까지 가능합니다.');
+		return false;
+	}
+	var cont='<div id="addition_field_'+fields_count+'" class="row mb-3">'
+			+'	<div class="col-12 col-xxl-2 col-xl-6">'
+			+'		<label for="field_name_'+fields_count+'" class="col-form-label col-sm-auto text-sm-end pr5">필드명(name)</label>'
+			+'		<input type="text" id="field_name_'+fields_count+'" name="field_name[]" title="필드명" placeholder="필드명" value="" maxlength="50" class="form-control" />'
+			+'	</div>'
+			+'	<div class="col-12 col-xxl-2 col-xl-6">'
+			+'		<label for="label_name_'+fields_count+'" class="col-form-label col-sm-auto text-sm-end pr5">라벨명(label)</label>'
+			+'		<input type="text" id="label_name_'+fields_count+'" name="label_name[]" title="라벨명" placeholder="라벨명" value="" maxlength="50" class="form-control" />'
+			+'	</div>'
+			+'	<div class="col-12 col-xxl-2 col-xl-6">'
+			+'		<label for="type_'+fields_count+'" class="col-form-label col-sm-auto text-sm-end pr5">종류</label>'
+			+'		<select id="type_'+fields_count+'" name="type[]" class="form-select">'
+			+'			<option value="text">Text</option>'
+			+'			<option value="textarea">Textarea</option>'
+			+'			<option value="select">Select</option>'
+			+'			<option value="radio">Radio</option>'
+			+'			<option value="checkbox">Checkbox</option>'
+			+'		</select>'
+			+'	</div>'
+			+'	<div class="col-12 col-xxl-6 col-xl-6">'
+			+'		<label for="point_reple" class="col-form-label col-sm-auto text-sm-end pr5">기본값</label>'
+			+'		<input type="text" id="value" name="value[]" title="기본값" placeholder="기본값" value="" maxlength="" class="form-control" /><p class="gray mb-0">select/radio/checkbox의 경우 \'값|값\' 형식으로 입력하세요.</p>'
+			+'	</div>'
+			+'</div>';
+
+	$("#addition_fields_wrap").removeClass('p0').removeClass('border_0').append(cont);
+
+	fields_count++;
+}
+</script>
+{/literal}
+
+<main class="content">
+	<div class="container-fluid p-0">
+
+		<h1 class="h3 mb-3">{$etc.board_title}</h1>
+
+		<div class="row">
+			<div class="col-12">
+				<div class="card">
+					<form name="writeform" method="post" action="{$smarty.server.SCRIPT_NAME}" enctype="multipart/form-data" onsubmit="return writeform_chk(this);">
+						<input type="hidden" name="menu" value="{$etc.menu}">
+						<input type="hidden" id="tn" name="tn" value="{$etc.tn}">
+						<input type="hidden" name="pagenum" value="{$etc.pagenum}">
+						<input type="hidden" name="search_select" value="{$etc.search_select}">
+						<input type="hidden" name="keyword" value="{$etc.keyword}">
+						<input type="hidden" name="idx" value="{$L.idx}">
+						<input type="hidden" name="mode" value="process">
+						<input type="hidden" name="modes" value="{$etc.modes}">
+
+						<div class="card-body">
+							<div class="row">
+								<div class="mb-3 col-lg-6">
+									<label for="board_id" class="form-label">게시판Code</label>
+									<input type="text" id="board_id" name="board_id" title="게시판Code" placeholder="게시판Code" value="{$L.board_id}" maxlength="55" class="form-control required" />
+								</div>
+								<div class="mb-3 col-lg-6">
+									<label for="title" class="form-label">게시판명</label>
+									<input type="text" id="title" name="title" title="게시판명" placeholder="게시판명" value="{$L.title}" maxlength="55" class="form-control required" />
+								</div>
+
+								<div class="mb-3 col-lg-6">
+									<label class="form-label">게시판 종류</label>
+									<div>
+										<div class="form-check form-check-inline">
+											<input type="radio" id="board_type1" name="board_type" value="normal" title="게시판 종류" class="form-check-input input_radio required"{if $etc.mode=='write' || $L.board_type=='normal'} checked="checked"{/if} />
+											<label class="form-check-label" for="board_type1">일반</label>
+										</div>
+										<div class="form-check form-check-inline">
+											<input type="radio" id="board_type2" name="board_type" value="review_horizontal" title="게시판 종류" class="form-check-input input_radio required"{if $L.board_type=='review_horizontal'} checked="checked"{/if} />
+											<label class="form-check-label" for="board_type2">리뷰-가로</label>
+										</div>
+										<div class="form-check form-check-inline">
+											<input type="radio" id="board_type3" name="board_type" value="review_vertical" title="게시판 종류" class="form-check-input input_radio required"{if $L.board_type=='review_vertical'} checked="checked"{/if} />
+											<label class="form-check-label" for="board_type3">리뷰-세로</label>
+										</div>
+										<div class="form-check form-check-inline">
+											<input type="radio" id="board_type4" name="board_type" value="gallery" title="게시판 종류" class="form-check-input input_radio required"{if $L.board_type=='gallery'} checked="checked"{/if} />
+											<label class="form-check-label" for="board_type4">갤러리</label>
+										</div>
+										<div class="form-check form-check-inline">
+											<input type="radio" id="board_type5" name="board_type" value="faq" title="게시판 종류" class="form-check-input input_radio required"{if $L.board_type=='faq'} checked="checked"{/if} />
+											<label class="form-check-label" for="board_type5">FAQ</label>
+										</div>
+										<div class="form-check form-check-inline">
+											<input type="radio" id="board_type6" name="board_type" value="qna" title="게시판 종류" class="form-check-input input_radio required"{if $L.board_type=='qna'} checked="checked"{/if} />
+											<label class="form-check-label" for="board_type6">Q&A</label>
+										</div>
+										<div class="form-check">
+											<input type="radio" id="board_type7" name="board_type" value="etc" title="게시판 종류" class="form-check-input input_radio required vam"{if $L.board_type=='etc'} checked="checked"{/if} />
+											<label class="form-check-label vam" for="board_type7">기타</label>
+											<input type="text" id="board_prefix" name="board_prefix" title="기타(템플릿명)" placeholder="템플릿명" value="{$L.board_prefix}" maxlength="55" class="form-control vam" />
+										</div>
+									</div>
+								</div>
+
+								<div class="mb-3 col-lg-6">
+									<label for="access_level" class="form-label">첨부파일 개수</label>
+									<input type="text" id="file_count" name="file_count" title="첨부파일 개수" placeholder="첨부파일 개수" value="{if $etc.mode=='write'}0{else}{$L.file_count}{/if}" maxlength="55" class="form-control required" />
+								</div>
+
+								<div class="mb-3">
+									<label for="access_level" class="form-label">필드추가</label>
+									<button type="button" onclick="fields_add();" class="btn btn-primary mb5"><i class="align-middle white" data-feather="plus"></i> 추가</button>
+									<p class="gray"><span class="red">*</span> 필드명을 공백으로 삭제하시면 해당 필드는 삭제됩니다.</p>
+									<div id="addition_fields_wrap" class="mb-1{if $L.addition_fields[0].name==''} p0 border_0{/if}">
+										{section name=i loop=$L.addition_fields}
+										<div id="addition_field_{$smarty.section.i.index}" class="row mb-3">
+											<div class="col-12 col-xxl-2 col-xl-6">
+												<label for="field_name_{$smarty.section.i.index}" class="col-form-label col-sm-auto text-sm-end pr5">필드명(name)</label>
+												<input type="text" id="field_name_{$smarty.section.i.index}" name="field_name[]" title="필드명" placeholder="필드명" value="{$L.addition_fields[i].name}" maxlength="50" class="form-control" />
+											</div>
+
+											<div class="col-12 col-xxl-2 col-xl-6">
+												<label for="label_name_{$smarty.section.i.index}" class="col-form-label col-sm-auto text-sm-end pr5">라벨명(label)</label>
+												<input type="text" id="label_name_{$smarty.section.i.index}" name="label_name[]" title="라벨명" placeholder="라벨명" value="{$L.addition_fields[i].label}" maxlength="50" class="form-control" />
+											</div>
+
+											<div class="col-12 col-xxl-2 col-xl-6">
+												<label for="type_{$smarty.section.i.index}" class="col-form-label col-sm-auto text-sm-end pr5">종류</label>
+												<select id="type_{$smarty.section.i.index}" name="type[]" class="form-select">
+													<option value="text"{if $L.addition_fields[i].type=='text'} selected="selected"{/if}>Text</option>
+													<option value="textarea"{if $L.addition_fields[i].type=='textarea'} selected="selected"{/if}>Textarea</option>
+													<option value="select"{if $L.addition_fields[i].type=='select'} selected="selected"{/if}>Select</option>
+													<option value="radio"{if $L.addition_fields[i].type=='radio'} selected="selected"{/if}>Radio</option>
+													<option value="checkbox"{if $L.addition_fields[i].type=='checkbox'} selected="selected"{/if}>Checkbox</option>
+												</select>
+											</div>
+
+											<div class="col-12 col-xxl-6 col-xl-6">
+												<label for="point_reple" class="col-form-label col-sm-auto text-sm-end pr5">기본값</label>
+												<input type="text" id="value" name="value[]" title="기본값" placeholder="기본값" value="{section name=j loop=$L.addition_fields[i].value}{$L.addition_fields[i].value[j]}{if !$smarty.section.j.last}|{/if}{/section}" maxlength="" class="form-control" />
+												<p class="gray mb-0">select/radio/checkbox의 경우 '값|값' 형식으로 입력하세요.</p>
+											</div>
+										</div>
+										{/section}
+									</div>
+								</div>
+
+								<div class="mb-3 col-12 col-xxl-4 col-xl-6">
+									<label for="access_level" class="form-label">접근권한</label>
+									<select id="access_level" name="access_level" class="form-select">
+										<option value="0"{if $L.access_level=='0'} selected="selected"{/if}>0</option>
+										<option value="1"{if $L.access_level=='1'} selected="selected"{/if}>1</option>
+										<option value="2"{if $L.access_level=='2'} selected="selected"{/if}>2</option>
+										<option value="3"{if $L.access_level=='3'} selected="selected"{/if}>3</option>
+										<option value="4"{if $L.access_level=='4'} selected="selected"{/if}>4</option>
+										<option value="5"{if $L.access_level=='5'} selected="selected"{/if}>5</option>
+										<option value="6"{if $L.access_level=='6'} selected="selected"{/if}>6</option>
+										<option value="7"{if $L.access_level=='7'} selected="selected"{/if}>7</option>
+										<option value="8"{if $L.access_level=='8'} selected="selected"{/if}>8</option>
+										<option value="9"{if $L.access_level=='9'} selected="selected"{/if}>9</option>
+										<option value="10"{if $L.access_level=='10'} selected="selected"{/if}>10</option>
+									</select>
+								</div>
+								<div class="mb-3 col-12 col-xxl-4 col-xl-6">
+									<label for="read_level" class="form-label">조회권한</label>
+									<select id="read_level" name="read_level" class="form-select">
+										<option value="0"{if $L.read_level=='0'} selected="selected"{/if}>0</option>
+										<option value="1"{if $L.read_level=='1'} selected="selected"{/if}>1</option>
+										<option value="2"{if $L.read_level=='2'} selected="selected"{/if}>2</option>
+										<option value="3"{if $L.read_level=='3'} selected="selected"{/if}>3</option>
+										<option value="4"{if $L.read_level=='4'} selected="selected"{/if}>4</option>
+										<option value="5"{if $L.read_level=='5'} selected="selected"{/if}>5</option>
+										<option value="6"{if $L.read_level=='6'} selected="selected"{/if}>6</option>
+										<option value="7"{if $L.read_level=='7'} selected="selected"{/if}>7</option>
+										<option value="8"{if $L.read_level=='8'} selected="selected"{/if}>8</option>
+										<option value="9"{if $L.read_level=='9'} selected="selected"{/if}>9</option>
+										<option value="10"{if $L.read_level=='10'} selected="selected"{/if}>10</option>
+									</select>
+								</div>
+								<div class="mb-3 col-12 col-xxl-4 col-xl-6">
+									<label for="write_level" class="form-label">작성권한</label>
+									<select id="write_level" name="write_level" class="form-select">
+										<option value="0"{if $L.write_level=='0'} selected="selected"{/if}>0</option>
+										<option value="1"{if $L.write_level=='1'} selected="selected"{/if}>1</option>
+										<option value="2"{if $L.write_level=='2'} selected="selected"{/if}>2</option>
+										<option value="3"{if $L.write_level=='3'} selected="selected"{/if}>3</option>
+										<option value="4"{if $L.write_level=='4'} selected="selected"{/if}>4</option>
+										<option value="5"{if $L.write_level=='5'} selected="selected"{/if}>5</option>
+										<option value="6"{if $L.write_level=='6'} selected="selected"{/if}>6</option>
+										<option value="7"{if $L.write_level=='7'} selected="selected"{/if}>7</option>
+										<option value="8"{if $L.write_level=='8'} selected="selected"{/if}>8</option>
+										<option value="9"{if $L.write_level=='9'} selected="selected"{/if}>9</option>
+										<option value="10"{if $L.write_level=='10'} selected="selected"{/if}>10</option>
+									</select>
+								</div>
+								<div class="mb-3">
+									<label class="form-label">포인트</label>
+									<div class="row">
+										<div class="col-12 col-xxl-3 col-xl-6">
+											<label for="point_read" class="col-form-label col-sm-auto text-sm-end pr5">조회</label>
+											<input type="text" id="point_read" name="point_read" title="조회포인트" placeholder="조회포인트" value="{$L.point_read}" maxlength="5" class="form-control required" />
+										</div>
+
+										<div class="col-12 col-xxl-3 col-xl-6">
+											<label for="point_write" class="col-form-label col-sm-auto text-sm-end pr5">쓰기</label>
+											<input type="text" id="point_write" name="point_write" title="쓰기포인트" placeholder="쓰기포인트" value="{$L.point_write}" maxlength="5" class="form-control required" />
+										</div>
+
+										<div class="col-12 col-xxl-3 col-xl-6">
+											<label for="point_reply" class="col-form-label col-sm-auto text-sm-end pr5">답글</label>
+											<input type="text" id="point_reply" name="point_reply" title="답글포인트" placeholder="답글포인트" value="{$L.point_reply}" maxlength="5" class="form-control required" />
+										</div>
+
+										<div class="col-12 col-xxl-3 col-xl-6">
+											<label for="point_reple" class="col-form-label col-sm-auto text-sm-end pr5">댓글</label>
+											<input type="text" id="point_reple" name="point_reple" title="댓글포인트" placeholder="댓글포인트" value="{$L.point_reple}" maxlength="5" class="form-control required" />
+										</div>
+									</div>
+								</div>
+								<div class="mb-3">
+									<label class="form-label">사용여부</label>
+									<div>
+										<div class="form-check form-check-inline">
+											<input type="radio" id="onoff1" name="onoff" value="1" title="사용여부" class="form-check-input input_radio required"{if $etc.mode=='write' || $L.onoff=='1'} checked="checked"{/if} />
+											<label class="form-check-label" for="onoff1">사용</label>
+										</div>
+										<div class="form-check form-check-inline">
+											<input type="radio" id="onoff2" name="onoff" value="0" title="사용여부" class="form-check-input input_radio required"{if $L.onoff=='0'} checked="checked"{/if} />
+											<label class="form-check-label" for="onoff2">미사용</label>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="card-footer">
+							<div class="dataTables_wrapper dt-bootstrap5">
+								<div class="row">
+									<div class="col-sm-12 col-md-5">
+										<input type="button" value="목록" onclick="location.href='?menu={$etc.menu}&tn={$etc.tn}&mode=list&search_select={$etc.search_select}&keyword={$etc.keyword}&pagenum={$etc.pagenum}'" class=" btn btn-secondary" />
+										<button type="button" onclick="history.back();" class="btn btn-secondary"><i class="align-middle white" data-feather="x"></i> 취소</button>
+										<button type="submit" class="btn btn-primary"><i class="align-middle white" data-feather="save"></i> 저장</button>
+									</div>
+								</div>
+							</div>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+</main>

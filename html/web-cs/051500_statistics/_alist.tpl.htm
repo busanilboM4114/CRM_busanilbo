@@ -1,0 +1,311 @@
+			<main class="content">
+				<div class="container-fluid p-0">
+
+					<div class="row mb-2 mb-xl-3">
+						<div class="col-auto d-none d-sm-block">
+							<h3><strong>{$etc.board_title}</strong></h3>
+						</div>
+					</div>
+
+					<div class="row">
+						<div class="col-12">
+							<div class="card">
+								<div class="card-body">
+									<div class="col-4">
+										<div class="input-group">
+											<input type="text" id="start_date" name="start_date" value="" class="form-control flatpickr-minimum" placeholder="Select date.." />
+											<input type="text" id="end_date" name="end_date" value="" class="form-control flatpickr-minimum" placeholder="Select date.." />
+											<button type="button" onclick="" class="btn btn-secondary">검색</button>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<div class="row">
+						<div class="col-12 col-xl-8">
+							<div class="card flex-fill w-100">
+								<div class="card-header">
+									<h5 class="card-title mb-0 pb3 pt5">기사 카테고리별 로그인 통계</h5>
+								</div>
+								<div class="card-body pt-2 pb-3">
+									<div class="chart chart-sm">
+										<canvas id="chartjs-dashboard-line"></canvas>
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<div class="col-12 col-xl-4">
+							<div class="card flex-fill w-100">
+								<div class="card-header">
+									<h5 class="card-title mb-0 pb3 pt5">기사별 로그인 백분위 통계</h5>
+								</div>
+								<div class="card-body pt-2 pb-3">
+									<div class="chart chart-sm">
+										<canvas id="chartjs-dashboard-daily-line"></canvas>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<div class="row">
+						<div class="col-12 col-xl-6">
+							<div class="card flex-fill w-100">
+								<div class="card-header">
+									<h5 class="card-title mb-0 pb3 pt5">로그인 전환율</h5>
+								</div>
+								<div class="card-body pt-2 pb-3">
+									<div class="chart">
+										<canvas id="chartjs-time-pie"></canvas>
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<div class="col-12 col-xl-6">
+							<div class="card flex-fill w-100">
+								<div class="card-header">
+									<h5 class="card-title mb-0 pb3 pt5">기사별 로그인 전환율</h5>
+								</div>
+								<div class="card-body pt-2 pb-3">
+									<div class="chart">
+										<canvas id="chartjs-dayofweek-pie"></canvas>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<div class="row">
+						<div class="col-12 col-xl-6">
+							<div class="card">
+								<div class="card-header">
+									<h5 class="card-title">로그인 기사 상위 5개</h5>
+								</div>
+								<table class="table table-striped">
+									<thead>
+										<tr>
+											<th style="width:25%;">카테고리</th>
+											<th style="width:75%">제목</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr>
+											<td>정치</td>
+											<td>이재명 '검찰 출석' 공방…"정치 수사"vs"개딸 앞 투사"</td>
+										</tr>
+										<tr>
+											<td>경제</td>
+											<td>집값 떨어져도 비싼 아파트는 잘 팔린다</td>
+										</tr>
+										<tr>
+											<td>경제</td>
+											<td>집값 떨어져도 비싼 아파트는 잘 팔린다</td>
+										</tr>
+										<tr>
+											<td>스포츠</td>
+											<td>'8치올+기세, 판 제대로 깔렸다!'…롯데, SSG전 스윕승+4연승 '불꽃 질주'…SSG 15-4 대파. 6위 도약</td>
+										</tr>
+										<tr>
+											<td>사회</td>
+											<td>"자고 일어났는데 숨을 쉬지 않아요" 마약 투약 20대 사망</td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+						</div>
+
+						<div class="col-12 col-xl-6">
+							<div class="card">
+								<div class="card-header">
+									<h5 class="card-title">로그인 기사 하위 5개</h5>
+								</div>
+								<table class="table table-striped">
+									<thead>
+										<tr>
+											<th style="width:25%;">카테고리</th>
+											<th style="width:75%">제목</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr>
+											<td>사회</td>
+											<td>"학교 개방 확대" vs "안전대책 우선" [어떻게 생각하십니까]</td>
+										</tr>
+										<tr>
+											<td>스포츠</td>
+											<td>여자골프 '부 시대' 열렸다…올해만 3승 릴리아 부, 랭킹 1위 등극</td>
+										</tr>
+										<tr>
+											<td>정치</td>
+											<td>"기온 1도 오르면 식량 가격 6% 상승"… 경제 변수 된 기후 변화</td>
+										</tr>
+										<tr>
+											<td>사회</td>
+											<td>부산시, 내년부터 형제복지원 피해자에 위로금·생계비 지원</td>
+										</tr>
+										<tr>
+											<td>연예</td>
+											<td>'다나카'부터 '개콘'까지… 부산 '웃음바다'에 풍덩!</td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+						</div>
+					</div>
+
+				</div>
+			</main>
+
+			{literal}
+			<script>
+			document.addEventListener("DOMContentLoaded", function() {
+				// Bar chart
+				new Chart(document.getElementById("chartjs-dashboard-line"), {
+					type: "bar",
+					data: {
+						labels: ["정치", "경제", "사회", "스포츠", "연예", "기타"],
+						datasets: [{
+							backgroundColor: window.theme.primary,
+							borderColor: window.theme.primary,
+							data: [54, 67, 78, 55, 62, 55],
+							barPercentage: .85,
+							categoryPercentage: .5
+						}]
+					},
+					options: {
+						maintainAspectRatio: false,
+						legend: {
+							display: false
+						},
+						scales: {
+							yAxes: [{
+								gridLines: {
+									display: false
+								},
+								stacked: false,
+								ticks: {
+									stepSize: 20
+								}
+							}],
+							xAxes: [{
+								stacked: false,
+								gridLines: {
+									color: "transparent"
+								}
+							}]
+						}
+					}
+				});
+			});
+			</script>
+
+			<script>
+			document.addEventListener("DOMContentLoaded", function() {
+				// Pie chart
+				new Chart(document.getElementById("chartjs-dashboard-daily-line"), {
+					type: "pie",
+					data: {
+						labels: ["정치", "경제", "사회", "스포츠", "연예", "기타"],
+						datasets: [{
+							label: "비율(%)",
+							data: [16, 17, 15, 20, 22, 10],
+							backgroundColor: [
+								window.theme.primary,
+								window.theme.warning,
+								window.theme.secondary,
+								"#E8EAED",
+								window.theme.success,
+								window.theme.info
+							],
+							borderColor: "transparent"
+						}]
+					},
+					options: {
+						responsive: !window.MSInputMethodContext,
+						maintainAspectRatio: false
+					}
+				});
+			});
+			</script>
+
+			<script>
+			document.addEventListener("DOMContentLoaded", function() {
+				// Pie chart
+				new Chart(document.getElementById("chartjs-time-pie"), {
+					type: "pie",
+					data: {
+						labels: ["전체접속", "로그인"],
+						datasets: [{
+							data: [60, 40],
+							backgroundColor: [
+								window.theme.primary,
+								window.theme.warning
+							],
+							borderColor: "transparent"
+						}]
+					},
+					options: {
+						responsive: !window.MSInputMethodContext,
+						maintainAspectRatio: false
+					}
+				});
+			});
+			</script>
+
+			<script>
+			document.addEventListener("DOMContentLoaded", function() {
+				// Bar chart
+				new Chart(document.getElementById("chartjs-dayofweek-pie"), {
+					type: "bar",
+					data: {
+						labels: ["정치", "경제", "사회", "스포츠", "연예", "기타"],
+						datasets: [{
+							backgroundColor: window.theme.primary,
+							borderColor: window.theme.primary,
+							data: [54, 67, 78, 55, 62, 55],
+							barPercentage: .85
+						},{
+							backgroundColor: window.theme.warning,
+							borderColor: window.theme.warning,
+							data: [18, 23, 35, 21, 17, 11],
+							barPercentage: .85
+						}]
+					},
+					options: {
+						maintainAspectRatio: false,
+						legend: {
+							display: false
+						},
+						scales: {
+							yAxes: [{
+								gridLines: {
+									display: false
+								},
+								stacked: false,
+								ticks: {
+									stepSize: 20
+								}
+							}],
+							xAxes: [{
+								stacked: false,
+								gridLines: {
+									color: "transparent"
+								}
+							}]
+						}
+					}
+				});
+			});
+			</script>
+
+			<script>
+				document.addEventListener("DOMContentLoaded", function() {
+					// Flatpickr
+					flatpickr(".flatpickr-minimum");
+				});
+			</script>
+			{/literal}

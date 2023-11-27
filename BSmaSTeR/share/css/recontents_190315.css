@@ -1,0 +1,100 @@
+@charset "utf-8";
+/*테이블*/
+#contents_wrap h2 {margin: 0px; position: relative; padding: 0 0 0 10px;font-size:18px;color:#222;line-height:100%;}
+#contents_wrap h2:before {content: ""; display: block; width: 5px; height: 5px; background-color: #5a7389; position: absolute; left: 0; top: 6px;}
+#contents_wrap h3 {margin: 0px; position: relative; padding: 0 0 0 10px;font-size:14px;color:#222;font-weight:normal;line-height:100%;}
+#contents_wrap h3:before {content: ""; display: block; width: 5px; height: 5px; background-color: #ccc; position: absolute; left: 0; top: 6px;}
+#contents_wrap a{color:#2a7865;}
+#contents_wrap a:hover{text-decoration:underline;}
+.dataTable{margin-top:10px;line-height:100%;}
+.dataTable tr th {background-color: #eee;border: 1px solid #d1d1d1;padding:10px;font-size:12px;}
+.dataTable tr th a{color:#3990df !important;}
+.dataTable tr th a:hover{text-decoration:underline;}
+.dataTable tr td {border: 1px solid #d1d1d1; padding: 10px;font-size:12px;}
+.dataTable tr th:first-child, .dataTable tr td:first-child {border-left:none;}
+.dataTable tr th:last-child, .dataTable tr td:last-child {border-right:none;}
+
+#contents_wrap .tab{
+	margin-top:20px;
+}
+
+#contents_wrap .tab ul li{
+	display:inline-block;
+	float:left;
+}
+
+#contents_wrap .tab ul li a{
+	display:inline-block;
+	padding: 9px 20px !important;
+	line-height:100%;
+	font-size:12px;
+	text-align:center;
+	text-decoration:none !important;
+	border-top: 1px solid #ccc;
+	border-right: 1px solid #ccc;
+	border-bottom: 1px solid #ccc;
+	color:#555;
+}
+
+#contents_wrap .tab ul li a.first{
+	border-left: 1px solid #ccc;
+}
+
+#contents_wrap .tab ul li a:hover, #contents_wrap .tab ul li a.on{
+	color:#fff;
+	background:#5a7389;
+}
+
+/*테이블-button*/
+#contents_wrap .fncBtn {text-align: right; margin-top: 20px;}
+#contents_wrap .fncBtn > span {display: inline-block;}
+#contents_wrap .fncBtn > span > input {width: 80px; height: 30px;}
+#contents_wrap .fncBtn .left input{background-color: #eee; border: 1px solid #eee;}
+#contents_wrap .fncBtn .right input{background-color: #555; border: 1px solid #555; color: #fff;}
+#contents_wrap .fncBtn input.list_btn {float: left; width: 80px; height: 30px; background-color: #eee; border: 1px solid #eee;}
+
+/*테이블-paging*/
+#contents_wrap .pageNav {margin-top: 20px; text-align: center;}
+#contents_wrap .pageNav button {border: 1px solid #ccc; height: 20px; width: 20px; vertical-align: middle; }
+#contents_wrap .pageNav button img {text-align: center; display: inline-block;}
+#contents_wrap .pageNav strong, #contents_wrap .pageNav a {margin: 0 5px; vertical-align: middle;}
+
+/*테이블-search*/
+#contents_wrap .search {margin-top: 10px; text-align: center;}
+#contents_wrap .search select {width: 100px; height: 30px; border: 1px solid #ccc; box-sizing: border-box; vertical-align: middle; margin-right: 3px; padding-left: 5px;}
+#contents_wrap .search input {height: 30px; border: 1px solid #ccc; box-sizing: border-box; vertical-align: middle;}
+#contents_wrap .search input.btnGray {width: 80px; background-color: #555; color: #fff;}
+
+/*테이블-제품카데고리검색*/
+#contents_wrap .funcNav {margin-bottom: 10px;}
+#contents_wrap .funcNav select {width: 150px;}
+
+/*viewTable*/
+.viewTable {margin-top: 10px;}
+.viewTable tr td.first, .viewTable tr th.first {border-top: 1px solid #ddd;}
+.viewTable tr th.bg_eee {background-color :#eee;}
+#form1 .viewTable tr td {padding-left: 10px;}
+.viewTable tr td {border-bottom: 1px solid #ddd;}
+
+/*boardCont*/
+.boardCont {border-bottom: 1px solid #ccc; }
+.boardCont table tr td {border-bottom: 0 !important;}
+
+/*pageMove*/
+.pageMove {margin-top: 10px;}
+.pageMove ul li {border-bottom: 1px solid #ccc; padding: 10px 0;}
+.pageMove ul li.next {border-top: 1px solid #ccc;}
+.pageMove ul li span {width: 20%; display: inline-block; text-align: center;}
+
+/*쓰기페이지*/
+.writeForm tr th {background-color: #eee; border-bottom: 1px solid #ccc;}
+.writeForm tr td {padding: 8px 0;  border-bottom: 1px solid #ccc; padding-left: 15px;}
+.writeForm tr td.first, .writeForm tr th.first {border-top: 1px solid #ddd;}
+.writeForm tr td.first label {vertical-align: middle;}
+.writeForm tr td textarea,.writeForm tr td input {height: 20px; border: 1px solid #ddd; padding: 0 5px;}
+.writeForm tr td input#notice, .writeForm tr td input#pkind2, .writeForm tr td input#pkind1, .writeForm tr td input#scroll1, .writeForm tr td input#scroll2, .writeForm tr td input#new_flag, .writeForm tr td input#hit_flag, .writeForm tr td input#main_flag{height: auto; vertical-align: top;}
+.writeForm tr td input.input {padding: 0;}
+.writeForm tr td input.required {padding: 0 5px;}
+.writeForm label.vat {vertical-align: top !important;}
+
+.ui-datepicker-trigger { margin: -4px 0 0 -26px; vertical-align: middle; cursor: pointer; }

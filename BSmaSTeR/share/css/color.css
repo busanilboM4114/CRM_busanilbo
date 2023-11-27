@@ -1,0 +1,28 @@
+.white {color: #fff;}
+.light-gray {color: #ccc;}
+.gray {color: #777;}
+.black {color: #222;}
+
+.bg-naver {background: #00c73c; border: 1px solid #00b336;}
+.bg-naver:hover {background: #00b336; border: 1px solid #00b336;}
+.bg-kakao {background: #f8e049; border: 1px solid #e0ca42; color: #495057;}
+.bg-kakao:hover {background: #e0ca42; border: 1px solid #e0ca42; color: #495057 !important;}
+.bg-busan {background: #00539d; border: 1px solid #004b8e;}
+.bg-busan:hover {background: #004b8e; border: 1px solid #004b8e;}
+.bg-b-read {background: #ff0060; border: 1px solid #e60057;}
+.bg-b-read:hover {background: #e60057; border: 1px solid #e60057;}
+.bg-weekend {background: #ff9631; border: 1px solid #fa8734;}
+.bg-weekend:hover {background: #fa8734; border: 1px solid #fa8734;}
+.bg-news-cook {background: #00c6bc; border: 1px solid #18beaf;}
+.bg-news-cook:hover {background: #18beaf; border: 1px solid #18beaf;}
+.bg-wandj {background: #fff; border: 1px solid #ddd; color: #495057;}
+.bg-wandj:hover {background: #ddd; border: 1px solid #ddd; color: #495057 !important;}
+
+/* 정렬 */
+.justify-between {justify-content: space-between;}
+.flex-end {justify-content: flex-end;}
+
+/* margin */
+
+/* 추가 */
+#addition_fields_wrap {background: #f5f5f5; border-radius: 3px; border: 1px solid #ddd; padding: 1.5rem;}

@@ -1,0 +1,44 @@
+<div class="container">
+	<div class="title">
+		<h2 class="score-700 font-36">{$board_config.title}</h2>
+	</div>
+
+	<div class="board">
+		<ul class="board-type-gallery">
+			{section name=i loop=$L}
+			<li>
+				<a href="/html/board_view.php">
+					<div class="head">
+						<div class="img">
+							<img src="/img/click_01.jpg" alt="" />
+						</div>
+					</div>
+					<div class="body">
+						<h4>{$L[i].title}</h4>
+						<p>{$L[i].short_desc}</p>
+					</div>
+				</a>
+			</li>
+			{sectionelse}
+			<li>
+				등록된 자료가 없습니다.
+			</li>
+			{/section}
+		</ul>
+	</div>
+	<div class="margin-t-50">
+		<div class="pagination">
+			<ul class="pagenum">
+				{$etc.pageclick}
+			</ul>
+		</div>
+	</div>
+	<div class="board-search margin-t-30 margin-b-100 center">
+		<form name="board-searchform" class="flex align-center justify-center" id="board-searchform">
+			<input type="hidden" name="board_idx" value="{$etc.board_idx}" />
+			<input type="hidden" name="search_select" value="all" />
+			<input name="keyword" id="keyword" type="text" class="text" value="{$etc.keyword}" title="검색어를 입력해 주세요">
+			<input type="submit" class="board-search-button" value="">
+		</form>
+	</div>
+</div>

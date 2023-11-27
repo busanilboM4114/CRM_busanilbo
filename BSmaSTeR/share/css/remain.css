@@ -1,0 +1,20 @@
+#contents_wrap h2{
+	display:none;
+}
+
+.main_contents{
+	position:relative;
+}
+
+.more_btn{
+	position:absolute;
+	top:0;
+	right:0;
+}
+
+#contents_wrap h3:before {background-color: #5a7389 !important;}
+
+.dataTable{margin-top:15px !important;}
+
+.float_right_margin{margin-right:1.6% !important;}
+.main_w44{width:43.7% !important;}

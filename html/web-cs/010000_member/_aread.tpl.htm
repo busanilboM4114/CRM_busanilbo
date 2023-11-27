@@ -1,0 +1,184 @@
+{literal}
+<script type="text/javascript">
+	function del() {
+		if ( confirm('정말 삭제하시겠습니까?') ) {
+			document.form1.modes.value = "delete";
+			document.form1.submit();
+		}
+	}
+</script>
+{/literal}
+
+<main class="content">
+	<div class="container-fluid p-0">
+
+		<h1 class="h3 mb-3">{$etc.board_title}</h1>
+
+		<div class="row">
+			<div class="col-12">
+				<div class="card">
+					<div class="card-body">
+						<table class="table">
+							<colgroup>
+								<col width="15%" />
+								<col width="35%" />
+								<col width="15%" />
+								<col width="35%" />
+							</colgroup>
+							<tr>
+								<th><i class="align-middle light-gray" data-feather="user"></i> 아이디</th>
+								<td>{$L.mb_id}</td>
+								<th><i class="align-middle light-gray" data-feather="lock"></i> 비밀번호</th>
+								<td></td>
+							</tr>
+							<tr>
+								<th><i class="align-middle light-gray" data-feather="tag"></i> 이름</th>
+								<td>{$L.mb_name}</td>
+								<th><i class="align-middle light-gray" data-feather="tag"></i> 닉네임</th>
+								<td>{$L.mb_nick}</td>
+							</tr>
+							<tr>
+								<th><i class="align-middle light-gray" data-feather="layers"></i> 회원레벨</th>
+								<td>{$L.mb_level}</td>
+								<th><i class="align-middle light-gray" data-feather="layers"></i> 회원구분</th>
+								<td>{$L.member_type}</td>
+							</tr>
+							<tr>
+								<th><i class="align-middle light-gray" data-feather="mail"></i> 이메일</th>
+								<td>{$L.mb_email}</td>
+								<th><i class="align-middle light-gray" data-feather="smartphone"></i> 휴대폰번호</th>
+								<td>{$L.mb_hp}</td>
+							</tr>
+							<tr>
+								<th><i class="align-middle light-gray" data-feather="home"></i> 주소</th>
+								<td colspan="3">[{$L.mb_zonecode}]{$L.mb_addr1} {$L.mb_addr2}{if $L.mb_addr3} [참고항목 : {$L.mb_addr3}]{/if}</td>
+							</tr>
+							<tr>
+								<th><i class="align-middle light-gray" data-feather="check-square"></i> 메일 수신</th>
+								<td>{$L.mb_mailling}</td>
+								<th><i class="align-middle light-gray" data-feather="check-square"></i> SMS 수신</th>
+								<td>{$L.mb_sms}</td>
+							</tr>
+							<tr>
+								<th><i class="align-middle light-gray" data-feather="gift"></i> 생년월일</th>
+								<td>{$L.mb_birth}</td>
+								<th><i class="align-middle light-gray" data-feather="users"></i> 성별</th>
+								<td>{$L.mb_sex}</td>
+							</tr>
+							<tr>
+								<th><i class="align-middle light-gray far fa-newspaper"></i> 뉴스레터 구독</th>
+								<td>
+									{if $L.newsletter1}
+									<img src="./img/b-read.png" width="15" height="15" class="vam" /> B-read</label>
+									{/if}
+									{if $L.newsletter2}
+									<img src="./img/weekend.png" width="15" height="15" /> 경건한 주말
+									{/if}
+									{if $L.newsletter3}
+									<img src="./img/wandj.png" width="15" height="15" /> Week&Joy
+									{/if}
+									{if $L.newsletter4}
+									<img src="./img/news-cook.png" width="15" height="15" /> 논설위원의 뉴스 요리
+									{/if}
+								</td>
+								<th><i class="align-middle light-gray" data-feather="gift"></i> 포인트</th>
+								<td>{$L.mb_point}</td>
+							</tr>
+						</table>
+					</div>
+					<div class="card-footer">
+						<button type="button" class="btn btn-secondary" onclick="location.href='?menu={$etc.menu}&tn={$etc.tn}&mode=list&search_select={$etc.search_select}&keyword={$etc.keyword}&pagenum={$etc.pagenum}'"><i class="align-middle white" data-feather="list"></i> 목록</button>
+						<button type="button" class="btn btn-secondary"><i class="align-middle white" data-feather="trash-2"></i> 삭제</button>
+						<button type="button" class="btn btn-secondary"><i class="align-middle white" data-feather="edit"></i> 수정</button>
+						<button type="button" class="btn btn-primary"><i class="align-middle white" data-feather="plus"></i> 추가</button>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col-12">
+				<div class="card">
+					<div class="card-header">
+						<h5 class="card-title mb-0 pb3 pt5">포인트 내역</h5>
+					</div>
+
+					<div class="card-body">
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</main>
+
+{*
+<div id="contents_wrap">
+
+	<div id="loaction">Home &gt; <strong>{$etc.board_title}</strong></div>
+
+	<h2>{$etc.board_title}</h2>
+
+	<form method="post" id="form1" name="form1" action="{$smarty.server.PHP_SELF}">
+		<input type="hidden" name="mode" value="process">
+		<input type="hidden" name="modes" value="delete">
+		<input type="hidden" name="idx" value="{$L.idx}">
+		<input type="hidden" name="menu" value="{$etc.menu}">
+		<input type="hidden" name="tn" value="{$etc.tn}">
+		<input type="hidden" name="search_select" value="{$etc.search_select}">
+		<input type="hidden" name="keyword" value="{$etc.keyword}">
+		<input type="hidden" name="pagenum" value="{$etc.pagenum}">
+
+		<table class="dataTable mt20">
+			<tbody>
+				<tr>
+					<th>제목</th>
+					<td colspan="5" class="p10"><h4>{$L.title}</h4></td>
+				</tr>
+				<tr>
+					<th style="width:16%">작성자</th>
+					<td style="width:17%" class="p10">{$L.user_name}</td>
+					<th style="width:16%">작성일</th>
+					<td style="width:18%" class="p10">{$L.reg_date[0]}</td>
+					<th style="width:16%">조회수</th>
+					<td style="width:17%" class="p10">{$L.hits}</td>
+				</tr>
+				<tr>
+					<th>첨부파일</th>
+					<td colspan="5" class="p10">{if $L.filename1 != ""}<a href="file_down.php?idx={$L.idx}&menu={$etc.menu}&tn={$etc.tn}&no=1">{$L.filename_real1}{else}첨부파일이 없습니다.</a>{/if}</td>
+				</tr>
+			</tbody>
+		</table>
+
+		<div class="boardCont">
+			<div class="boardRead">
+				<div class="boardReadCont" style="padding:15px 0;">
+					{$L.contents}
+				</div>
+			</div>
+		</div>
+
+	</form>
+
+	<div class="fncBtn" style="padding-top:18px;padding-bottom:18px;"><!--<div class="tar mt10">-->
+		<span class="left">
+			<input type="button" value="목록"  class="list_btn" onclick="location.href='?menu={$etc.menu}&tn={$etc.tn}&mode=list&search_select={$etc.search_select}&keyword={$etc.keyword}&pagenum={$etc.pagenum}&category_idx={$etc.category_idx}'" class="btnGray hand" />
+		</span>
+
+		<span class="center">
+
+		</span>
+
+		<span class="right">
+			<input type="button" value="삭제" onclick="del();" class="btnGray hand" />
+			<input type="button" value="수정" onclick="location.href='?menu={$etc.menu}&tn={$etc.tn}&mode=modify&idx={$L.idx}&search_select={$etc.search_select}&keyword={$etc.keyword}&pagenum={$etc.pagenum}&category_idx={$etc.category_idx}'" class="btnGray hand" />
+		</span>
+	</div>
+
+	<div class="pageMove">
+		<ul>
+			<li class="next"> <span>이전</span> {$etc.pre_s} </li>
+			<li class="prev"> <span>다음</span> {$etc.next_s} </li>
+		</ul>
+	</div>
+</div>
+*}

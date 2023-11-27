@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <title>Swiper demo</title>
+  <!-- Link Swiper's CSS -->
+  <link rel="stylesheet" href="../package/swiper-bundle.min.css">
+
+  <!-- Demo styles -->
+  <style>
+    html,
+    body {
+      position: relative;
+      height: 100%;
+    }
+
+    body {
+      background: #eee;
+      font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+      font-size: 14px;
+      color: #000;
+      margin: 0;
+      padding: 0;
+    }
+
+    .swiper-container {
+      width: 100%;
+      height: 100%;
+    }
+
+    .swiper-slide {
+      text-align: center;
+      font-size: 18px;
+      background: #fff;
+
+      /* Center slide text vertically */
+      width:450px;
+	  /* margin-right:100px; */
+    }
+	.container {width:1400px; margin:auto; overflow:visible;}
+	.swiper-container {overflow:visible;}
+	.swiper-wrapper {box-sizing:border-box; overflow:visible;}
+  </style>
+</head>
+
+<body style="overflow-x:hidden;">
+  <!-- Swiper -->
+  <div class="container">
+	  <div class="swiper-container">
+		<div class="swiper-wrapper">
+		  <div class="swiper-slide">Slide 1</div>
+		  <div class="swiper-slide">Slide 2</div>
+		  <div class="swiper-slide">Slide 3</div>
+		  <div class="swiper-slide">Slide 4</div>
+		  <div class="swiper-slide">Slide 5</div>
+		  <div class="swiper-slide">Slide 6</div>
+		  <div class="swiper-slide">Slide 7</div>
+		  <div class="swiper-slide">Slide 8</div>
+		  <div class="swiper-slide">Slide 9</div>
+		</div>
+	  </div>
+  </div>
+
+  <!-- Swiper JS -->
+  <script src="../src/swiper-bundle.min.js"></script>
+
+  <!-- Initialize Swiper -->
+  <script>
+    var swiper = new Swiper('.swiper-container', {
+		slidesPerView : 'auto',
+		autoResize:false,
+		spaceBetween: 50
+	});
+  </script>
+</body>
+
+</html>

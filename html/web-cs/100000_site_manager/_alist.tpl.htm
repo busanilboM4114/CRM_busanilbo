@@ -1,0 +1,137 @@
+{literal}
+<script type="text/javascript">
+function view_article(idx)
+{
+	location.href=document.getElementById(idx).href;
+}
+
+function del()
+{
+	var f = document.form1;
+	var isChecked = false;
+	var obj = document.getElementsByName("isDel[]");
+	for(var i = 0 ; i < obj.length; i++)
+	{
+		if(document.getElementsByName('isDel[]')[i].checked==true)
+		{
+			isChecked=true;
+			break;
+		}
+	}
+
+	if(isChecked==false)
+	{
+		alert('삭제 대상을 선택하세요.');
+		return;
+	}
+	else
+	{
+		if(confirm('선택한 대상을 삭제하시겠습니까?'))
+		{
+			f.modes.value = "alldel";
+			f.submit();
+		}
+	}
+}
+
+// 전체선택/해제
+function total_check(bool)
+{
+	var obj = document.getElementsByName("isDel[]");
+	for (var i=0; i<obj.length; i++) obj[i].checked = bool;
+}
+
+</script>
+{/literal}
+
+<main class="content">
+	<div class="container-fluid p-0">
+
+		<h1 class="h3 mb-3">{$etc.board_title}</h1>
+
+		<div class="row">
+			<div class="col-12">
+				<div class="card">
+					<div class="card-body">
+						검색
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-12">
+				<div class="card">
+					<div class="card-body">
+						<form method="post" id="form1" name="form1" action="{$smarty.server.PHP_SELF}" class="p0 m0">
+							<input type="hidden" id="mode" name="mode" value="process">
+							<input type="hidden" id="modes" name="modes" value="alldel">
+							<input type="hidden" id="menu" name="menu" value="{$etc.menu}">
+							<input type="hidden" id="tn" name="tn" value="{$etc.tn}">
+							<input type="hidden" name="search_select" value="{$etc.search_select}">
+							<input type="hidden" name="keyword" value="{$etc.keyword}">
+							<input type="hidden" name="pagenum" value="{$etc.pagenum}">
+
+							<table class="table table-striped">
+								<colgroup>
+									<col />
+									<col />
+									<col />
+									<col />
+									<col />
+									<col />
+									<col />
+									<col />
+									<col />
+								</colgroup>
+								<thead>
+									<tr>
+										<th class="tac"><input type="checkbox" onclick="total_check(this.checked);" name="allcheck" value="checkbox" /></th>
+										<th class="tac">번호</th>
+										<th class="tac">사이트명</th>
+										<th class="tac">도메인</th>
+										<th class="tac">사용여부</th>
+										<th class="tac">생성자</th>
+										<th class="tac">생성일</th>
+									</tr>
+								</thead>
+								{section name=i loop=$L}
+								<tr>
+									<td class="tac"><input type="checkbox" name="isDel[]" value="{$L[i].idx}" /></td>
+									<td class="hand tac" onclick="view_article('article_{$L[i].idx}')">{$L[i].no}<a href="?menu={$etc.menu}&mode=modify&idx={$L[i].idx}&tn={$etc.tn}&pagenum={$etc.pagenum}&search_select={$etc.search_select}&keyword={$etc.keyword}&category_idx={$etc.category_idx}" id="article_{$L[i].idx}"></a></td>
+									<td class="hand tac" onclick="view_article('article_{$L[i].idx}')">{$L[i].title}</td>
+									<td class="hand tac" onclick="view_article('article_{$L[i].idx}')">{$L[i].domain}</td>
+									<td class="hand tac" onclick="view_article('article_{$L[i].idx}')">{$L[i].onoff}</td>
+									<td class="hand tac" onclick="view_article('article_{$L[i].idx}')">{$L[i].user_name}</td>
+									<td class="hand tac" onclick="view_article('article_{$L[i].idx}')">{$L[i].reg_date[0]}</td>
+								</tr>
+								{sectionelse}
+								<tr>
+									<td class="p10 tac" colspan="9">등록된 자료가 없습니다.</td>
+								</tr>
+								{/section}
+							</table>
+						</form>
+					</div>
+					<div class="card-footer">
+						<div class="dataTables_wrapper dt-bootstrap5">
+							<div class="row">
+								<div class="col-sm-12 col-md-5">
+									<button type="button" class="btn btn-secondary" onclick="del();"><i class="align-middle white" data-feather="trash-2"></i> 삭제</button>
+									<button type="button" onclick="location.href='?menu={$etc.menu}&tn={$etc.tn}&mode=write&search_select={$etc.search_select}&keyword={$etc.keyword}&pagenum={$etc.pagenum}';" class="btn btn-primary"><i class="align-middle white" data-feather="plus"></i> 추가</button>
+								</div>
+
+								<div class="col-sm-12 col-md-7">
+									<div class="dataTables_paginate paging_simple_numbers" id="datatables-buttons_paginate">
+										<ul class="pagination">
+											{$etc.pageclick}
+										</ul>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</main>

@@ -1,0 +1,73 @@
+{literal}
+<script type="text/javascript">
+function writeform_chk(obj)
+{
+	flag=frm_chk(obj);
+	if(flag)
+	{
+		return true;
+	}
+	else
+	{
+		return false;
+	}
+}
+
+function target_search()
+{
+	win_open('{/literal}{$etc.Admin_Master_Path}html/{$etc.menu}/target_find.php?mode=sms_target_find{literal}', 'target_find', '1200', '700', '', '', 1, 1);
+}
+</script>
+{/literal}
+
+<main class="content">
+	<div class="container-fluid p-0">
+
+		<h1 class="h3 mb-3">{$etc.board_title} - SMS발송</h1>
+
+		<div class="row">
+			<div class="col-12">
+				<div class="card">
+					<form name="writeform" method="post" action="{$smarty.server.SCRIPT_NAME}" enctype="multipart/form-data" onsubmit="return writeform_chk(this);">
+						<input type="hidden" name="menu" value="{$etc.menu}">
+						<input type="hidden" id="tn" name="tn" value="{$etc.tn}">
+						<input type="hidden" name="pagenum" value="{$etc.pagenum}">
+						<input type="hidden" name="search_select" value="{$etc.search_select}">
+						<input type="hidden" name="keyword" value="{$etc.keyword}">
+						<input type="hidden" name="idx" value="{$L.idx}">
+						<input type="hidden" name="mode" value="process">
+						<input type="hidden" name="modes" value="{$etc.modes}">
+
+						<div class="card-body row">
+							<div class="mb-3 col-12">
+								<label for="target" class="form-label">발송대상</label>
+								<div class="row justify-between">
+									<div class="col-xxl-9 col-xl-9 mb-2">
+										<input type="text" id="target" name="target" title="발송대상" placeholder="발송대상. 수동추가를 원하실 경우 |전화번호(-제외)| 형식으로 추가 하세요." value="{$L.target}" class="form-control required" />
+									</div>
+									<div class="col-xxl-3 col-xl-3">
+										<button type="button" onclick="target_search();" class="btn btn-primary mb5">대상검색</button>
+									</div>
+								</div>
+							</div>
+							<div class="col-12">
+								<textarea name="contents" id="input_contents" placeholder="문자내용" style="width:100%; height:300px;" class="required form-control" title="내용">{$L.contents}</textarea>
+							</div>
+						</div>
+						<div class="card-footer">
+							<div class="dataTables_wrapper dt-bootstrap5">
+								<div class="row">
+									<div class="col-sm-12 col-md-5">
+										<input type="button" value="목록" onclick="location.href='?menu={$etc.menu}&tn={$etc.tn}&mode=list&search_select={$etc.search_select}&keyword={$etc.keyword}&pagenum={$etc.pagenum}'" class=" btn btn-secondary" />
+										<button type="button" onclick="history.back();" class="btn btn-secondary"><i class="align-middle white" data-feather="x"></i> 취소</button>
+										<button type="submit" class="btn btn-primary"><i class="align-middle white" data-feather="save"></i> 발송</button>
+									</div>
+								</div>
+							</div>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+</main>

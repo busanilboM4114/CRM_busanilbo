@@ -1,0 +1,462 @@
+{literal}
+<script type="text/javascript">
+function rand_data_add()
+{
+	$.ajax({
+		url: '/share/ajax.php',
+		type: "GET",
+		data: "mode=set_newsletter_statistics_rand_data",
+		datatype: "html",
+		success: function(data){
+			chk=data.split('|');
+			if(chk[0]=='1')
+			{
+				location.reload();
+			}
+			else
+			{
+				alert(chk[1]);
+			}
+		},
+		error: function(){
+			alert("데이터를 가져오는데 실패했습니다.");
+		}
+	});
+}
+</script>
+{/literal}
+			<main class="content">
+				<div class="container-fluid p-0">
+
+					<div class="row mb-2 mb-xl-3">
+						<div class="col-auto d-none d-sm-block">
+							<h3><strong>{$etc.board_title}</strong></h3>
+						</div>
+					</div>
+
+					<div class="row">
+						<div class="col-12 col-xl-6">
+							<div class="card flex-fill w-100">
+								<div class="card-header">
+									<h5 class="card-title mb-0 pb3 pt5">분류별 구독현황(%)</h5>
+								</div>
+								<div class="card-body pt-2 pb-3">
+									<div class="chart chart-sm">
+										<canvas id="chartjs-group"></canvas>
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<div class="col-12 col-xl-6">
+							<div class="card flex-fill w-100">
+								<div class="card-header">
+									<h5 class="card-title mb-0 pb3 pt5">연령대별 구독현황(%)</h5>
+								</div>
+								<div class="card-body pt-2 pb-3">
+									<div class="chart chart-sm">
+										<canvas id="chartjs-age"></canvas>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<div class="row">
+						<div class="col-12 col-xl-6">
+							<div class="card flex-fill w-100">
+								<div class="card-header">
+									<h5 class="card-title mb-0 pb3 pt5">성별 구독현황(%)</h5>
+								</div>
+								<div class="card-body pt-2 pb-3">
+									<div class="chart chart-sm">
+										<canvas id="chartjs-sex"></canvas>
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<div class="col-12 col-xl-6">
+							<div class="card flex-fill w-100">
+								<div class="card-header">
+									<h5 class="card-title mb-0 pb3 pt5">지역별 구독현황(%)</h5>
+								</div>
+								<div class="card-body pt-2 pb-3">
+									<div class="chart chart-sm">
+										<canvas id="chartjs-area"></canvas>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<div class="row">
+						<div class="col-8">
+							<div class="card">
+								<div class="card-body">
+									<div class="col-4 col-md-4">
+										<form action="{$smarty.server.PHP_SELF}" method="get" name="searchform" id="searchform" class="p0 m0">
+											<input type="hidden" name="menu" value="{$etc.menu}">
+											<input type="hidden" name="tn" value="{$etc.tn}">
+											<fieldset>
+												<div class="input-group">
+													<input type="text" id="start_date" name="start_date" value="{$etc.start_date}" class="form-control flatpickr-minimum" placeholder="Select date.." />
+													<input type="text" id="end_date" name="end_date" value="{$etc.end_date}" class="form-control flatpickr-minimum" placeholder="Select date.." />
+													<button type="submit" class="btn btn-secondary">검색</button>
+												</div>
+											</fieldset>
+										</form>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="col-4">
+							<div class="card">
+								<div class="card-body">
+									<button type="button" onclick="rand_data_add();" class="btn btn-secondary">10추가</button>
+									{*
+									<div class="pt10 pb10">
+										<button type="button" class="btn btn-secondary">1월 10추가</button>
+										<button type="button" class="btn btn-secondary">2월 10추가</button>
+										<button type="button" class="btn btn-secondary">3월 10추가</button>
+										<button type="button" class="btn btn-secondary">4월 10추가</button>
+										<button type="button" class="btn btn-secondary">5월 10추가</button>
+										<button type="button" class="btn btn-secondary">6월 10추가</button>
+									</div>
+									<div class="pb10">
+										<button type="button" class="btn btn-secondary">7월 10추가</button>
+										<button type="button" class="btn btn-secondary">8월 10추가</button>
+										<button type="button" class="btn btn-secondary">9월 10추가</button>
+										<button type="button" class="btn btn-secondary">10월 10추가</button>
+										<button type="button" class="btn btn-secondary">11월 10추가</button>
+										<button type="button" class="btn btn-secondary">12월 10추가</button>
+									</div>
+									<div class="">
+										<button type="button" class="btn btn-secondary">1일-10일 10추가</button>
+										<button type="button" class="btn btn-secondary">11일-20일 10추가</button>
+										<button type="button" class="btn btn-secondary">21일-31일 10추가</button>
+									</div>
+									*}
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<div class="row">
+						<div class="col-12">
+							<div class="card flex-fill w-100">
+								<div class="card-header">
+									<h5 class="card-title mb-0 pb3 pt5">분류별 구독신청/취소 현황</h5>
+								</div>
+								<div class="card-body pt-2 pb-3">
+									<div class="chart chart-sm">
+										<canvas id="chartjs-group-state"></canvas>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</main>
+
+			{literal}
+			<script>
+			document.addEventListener("DOMContentLoaded", function() {
+				// Pie chart
+				new Chart(document.getElementById("chartjs-group"), {
+					type: "pie",
+					data: {
+						labels: [
+							{/literal}
+							{section name=i loop=$group}
+							"{$group[i].name}"
+							{if !$smarty.section.i.last}
+							,
+							{/if}
+							{/section}
+							{literal}
+						],
+						datasets: [{
+							data: [
+								{/literal}
+								{section name=i loop=$group_cnt}
+								{$group_cnt[i].percent}
+								{if !$smarty.section.i.last}
+								,
+								{/if}
+								{/section}
+								{literal}
+							],
+							backgroundColor: [
+								window.theme.primary,
+								window.theme.warning,
+								window.theme.secondary,
+								"#E8EAED"
+							],
+							borderColor: "transparent"
+						}]
+					},
+					options: {
+						responsive: !window.MSInputMethodContext,
+						maintainAspectRatio: false,
+						legend: {
+							align: "start"
+						}
+					}
+				});
+			});
+			</script>
+
+			<script>
+			document.addEventListener("DOMContentLoaded", function() {
+				// Pie chart
+				new Chart(document.getElementById("chartjs-age"), {
+					type: "pie",
+					data: {
+						labels: [
+							{/literal}
+							{section name=i loop=$age_member_cnt}
+							"{$age_member_cnt[i].age_group}"
+							{if !$smarty.section.i.last}
+							,
+							{/if}
+							{/section}
+							{literal}
+						],
+						datasets: [{
+							data: [
+								{/literal}
+								{section name=i loop=$age_member_cnt}
+								{$age_member_cnt[i].percent}
+								{if !$smarty.section.i.last}
+								,
+								{/if}
+								{/section}
+								{literal}
+							],
+							backgroundColor: [
+								window.theme.primary,
+								window.theme.warning,
+								window.theme.secondary,
+								"#E85A7D",
+								window.theme.success,
+								window.theme.info
+							],
+							borderColor: "transparent"
+						}]
+					},
+					options: {
+						responsive: !window.MSInputMethodContext,
+						maintainAspectRatio: false,
+						legend: {
+							align: "start"
+						}
+					}
+				});
+			});
+			</script>
+
+			<script>
+			document.addEventListener("DOMContentLoaded", function() {
+				// Pie chart
+				new Chart(document.getElementById("chartjs-sex"), {
+					type: "pie",
+					data: {
+						labels: [
+							{/literal}
+							{section name=i loop=$sex_member_cnt}
+							"{$sex_member_cnt[i].name}"
+							{if !$smarty.section.i.last}
+							,
+							{/if}
+							{/section}
+							{literal}
+						],
+						datasets: [{
+							data: [
+								{/literal}
+								{section name=i loop=$sex_member_cnt}
+								{$sex_member_cnt[i].percent}
+								{if !$smarty.section.i.last}
+								,
+								{/if}
+								{/section}
+								{literal}
+							],
+							backgroundColor: [
+								window.theme.primary,
+								window.theme.warning
+							],
+							borderColor: "transparent"
+						}]
+					},
+					options: {
+						responsive: !window.MSInputMethodContext,
+						maintainAspectRatio: false
+					}
+				});
+			});
+			</script>
+
+			<script>
+			document.addEventListener("DOMContentLoaded", function() {
+				// Pie chart
+				new Chart(document.getElementById("chartjs-area"), {
+					type: "pie",
+					data: {
+						labels: [
+							{/literal}
+							{section name=i loop=$area}
+							"{$area[i].area}"
+							{if !$smarty.section.i.last}
+							,
+							{/if}
+							{/section}
+							{literal}
+						],
+						datasets: [{
+							data: [
+								{/literal}
+								{section name=i loop=$area_member_cnt}
+								{$area_member_cnt[i].percent}
+								{if !$smarty.section.i.last}
+								,
+								{/if}
+								{/section}
+								{literal}
+							],
+							backgroundColor: [
+								window.theme.primary,
+								window.theme.warning,
+								window.theme.secondary,
+								"#E8EAED",
+								window.theme.success,
+								window.theme.info,
+								"#98EAED",
+								"#E85AED",
+								window.theme.primary,
+								window.theme.warning,
+								window.theme.secondary,
+								"#E8EAED",
+								window.theme.success,
+								window.theme.info,
+								"#98EAED",
+								"#E85AED",
+								window.theme.info
+							],
+							borderColor: "transparent"
+						}]
+					},
+					options: {
+						responsive: !window.MSInputMethodContext,
+						maintainAspectRatio: false,
+						legend: {
+							align: "start"
+						}
+					}
+				});
+			});
+			</script>
+
+			<script>
+			document.addEventListener("DOMContentLoaded", function() {
+				// Bar chart
+				new Chart(document.getElementById("chartjs-group-state"), {
+					type: "bar",
+					data: {
+						labels: [
+							{/literal}
+							{section name=i loop=$group}
+							"{$group[i].name}"
+							{if !$smarty.section.i.last}
+							,
+							{/if}
+							{/section}
+							{literal}
+						],
+						datasets: [
+							{
+								backgroundColor: [
+									"#ff0066",
+									"#f99b44",
+									"#6dbd40",
+									"#00bfb7",
+								],
+								borderColor: [
+									"#ff0066",
+									"#f99b44",
+									"#6dbd40",
+									"#00bfb7",
+								],
+								data: [
+									{/literal}
+									{section name=i loop=$group_state_cnt}
+									{$group_state_cnt[i].on_cnt}
+									{if !$smarty.section.i.last}
+									,
+									{/if}
+									{/section}
+									{literal}
+								],
+								barPercentage: .85
+							},{
+								backgroundColor: [
+									"#800033",
+									"#9b4d05",
+									"#376020",
+									"#00605c",
+								],
+								borderColor: [
+									"#800033",
+									"#9b4d05",
+									"#376020",
+									"#00605c",
+								],
+								data: [
+									{/literal}
+									{section name=i loop=$group_state_cnt}
+									{$group_state_cnt[i].off_cnt}
+									{if !$smarty.section.i.last}
+									,
+									{/if}
+									{/section}
+									{literal}
+								],
+								barPercentage: .85
+							}
+						]
+					},
+					options: {
+						maintainAspectRatio: false,
+						legend: {
+							display: false
+						},
+						scales: {
+							yAxes: [{
+								gridLines: {
+									display: false
+								},
+								stacked: false,
+								ticks: {
+									stepSize: 20
+								}
+							}],
+							xAxes: [{
+								stacked: false,
+								gridLines: {
+									color: "transparent"
+								}
+							}]
+						}
+					}
+				});
+			});
+			</script>
+
+			<script>
+				document.addEventListener("DOMContentLoaded", function() {
+					// Flatpickr
+					flatpickr(".flatpickr-minimum");
+				});
+			</script>
+			{/literal}

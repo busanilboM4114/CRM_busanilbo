@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <title>Swiper demo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
+
+  <!-- Link Swiper's CSS -->
+  <link rel="stylesheet" href="../package/swiper-bundle.min.css">
+
+  <!-- Demo styles -->
+  <style>
+	* {box-sizing:border-box;}
+    body {
+      background: #eee;
+      font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+      font-size: 14px;
+      color: #000;
+      margin: 0;
+      padding: 0;
+    }
+
+    .swiper-container {
+      width: 1200px;
+	  height:300px;
+
+    }
+
+    .swiper-slide {
+	  width:400px;
+      text-align: center;
+      font-size: 18px;
+      background: #fff;
+	  border:1px solid #333;
+	  position:relative;
+	  overflow:visible;
+    }
+	.contents {position:absolute; top:0; left:0;}
+	.swiper-slide.swiper-slide-active .contents {background:#333; z-index:2; width:600px; height:600px; left:-100px;}
+  </style>
+</head>
+
+<body>
+  <!-- Swiper -->
+  <div class="swiper-container swiper1">
+    <div class="swiper-wrapper">
+      <div class="swiper-slide"><div class="contents">1</div></div>
+      <div class="swiper-slide"><div class="contents">2</div></div>
+      <div class="swiper-slide"><div class="contents">3</div></div>
+      <div class="swiper-slide"><div class="contents">4</div></div>
+      <div class="swiper-slide"><div class="contents">5</div></div>
+      <div class="swiper-slide"><div class="contents">6</div></div>
+      <div class="swiper-slide"><div class="contents">7</div></div>
+      <div class="swiper-slide"><div class="contents">8</div></div>
+      <div class="swiper-slide"><div class="contents">9</div></div>
+      <div class="swiper-slide"><div class="contents">0</div></div>
+    </div>
+    <!-- Add Pagination -->
+    <div class="swiper-pagination swiper-pagination1"></div>
+  </div>
+
+  <!-- Swiper -->
+  <div class="swiper-container swiper2">
+    <div class="swiper-wrapper">
+      <div class="swiper-slide">Slide 1</div>
+      <div class="swiper-slide">Slide 2</div>
+      <div class="swiper-slide">Slide 3</div>
+      <div class="swiper-slide">Slide 4</div>
+      <div class="swiper-slide">Slide 5</div>
+      <div class="swiper-slide">Slide 6</div>
+      <div class="swiper-slide">Slide 7</div>
+      <div class="swiper-slide">Slide 8</div>
+      <div class="swiper-slide">Slide 9</div>
+      <div class="swiper-slide">Slide 10</div>
+    </div>
+    <!-- Add Pagination -->
+    <div class="swiper-pagination swiper-pagination2"></div>
+  </div>
+
+  <!-- Swiper -->
+  <div class="swiper-container swiper3">
+    <div class="swiper-wrapper">
+      <div class="swiper-slide">Slide 1</div>
+      <div class="swiper-slide">Slide 2</div>
+      <div class="swiper-slide">Slide 3</div>
+      <div class="swiper-slide">Slide 4</div>
+      <div class="swiper-slide">Slide 5</div>
+      <div class="swiper-slide">Slide 6</div>
+      <div class="swiper-slide">Slide 7</div>
+      <div class="swiper-slide">Slide 8</div>
+      <div class="swiper-slide">Slide 9</div>
+      <div class="swiper-slide">Slide 10</div>
+    </div>
+    <!-- Add Pagination -->
+    <div class="swiper-pagination swiper-pagination3"></div>
+  </div>
+
+  <!-- Swiper JS -->
+  <script src="../package/swiper-bundle.min.js"></script>
+
+  <!-- Initialize Swiper -->
+  <script>
+    var swiper1 = new Swiper('.swiper1', {
+	  slidesPerView: 3,
+      spaceBetween: 0,
+	  centeredSlides: true,
+	  loop: true,
+      pagination: {
+        el: '.swiper-pagination1',
+        clickable: true,
+      },
+    });
+    var swiper2 = new Swiper('.swiper2', {
+      spaceBetween: 30,
+      pagination: {
+        el: '.swiper-pagination2',
+        clickable: true,
+      },
+    });
+    var swiper3 = new Swiper('.swiper3', {
+      spaceBetween: 30,
+      pagination: {
+        el: '.swiper-pagination3',
+        clickable: true,
+      },
+    });
+  </script>
+</body>
+
+</html>

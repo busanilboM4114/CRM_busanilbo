@@ -1,0 +1,45 @@
+/*검은색(#222)기본 버튼*/
+.button{
+	display:inline-block;
+	padding: 9px 0 !important;
+	line-height:100%;
+	font-size:12px;
+	text-align:center;
+	text-decoration:none !important;
+}
+.default_button{
+	color:#fff !important;
+	background-color:#222;
+}
+/*ckpa 기본 색깔 버튼*/
+.color_button1{
+	color:#fff !important;
+	background-color:#5a7389;
+}
+
+/*회색 색깔 버튼*/
+.color_button2{
+	color:#555 !important;
+	background-color:#ccc;
+}
+
+/*파란 색깔 버튼*/
+.color_button3{
+	color:#fff !important;
+	background-color:#3990df;
+}
+
+/*녹색 색깔 버튼*/
+.color_button4{
+	color:#fff !important;
+	background-color:#4c7c70;
+}
+
+.submit{
+	display:inline-block;
+	padding: 9px 0 !important;
+	line-height:100%;
+	font-size:12px;
+	text-align:center;
+	text-decoration:none !important;
+}

@@ -1,0 +1,32 @@
+.ui-datepicker-trigger { margin: 0px 0 0 -26px;}
+
+input[type="text"] {
+	padding:5px 8px 5px 8px;
+	line-height:100%;
+	vertical-align:middle;
+	border:1px solid #ddd;
+	font-size:12px;
+	height:18px;
+}
+
+input[type="radio"]{
+	vertical-align:top;
+	line-height:100%;
+}
+
+select {
+	color:#555;
+	vertical-align:middle;
+	border:1px solid #ddd;
+	padding:6px 20px 5px 5px;
+	line-height:100%;
+	appearance:none;
+	-webkit-appearance:none;
+	background: url(../../../img/select_arrow.png) no-repeat right 5px center;
+	height:30px;
+	font-size:12px;
+}
+
+.dataTable{
+	line-height:180%;
+}

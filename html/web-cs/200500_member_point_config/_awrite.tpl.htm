@@ -1,0 +1,112 @@
+{literal}
+<script type="text/javascript">
+function writeform_chk(obj)
+{
+	flag=frm_chk(obj);
+	if(flag)
+	{
+		return true;
+	}
+	else
+	{
+		return false;
+	}
+}
+
+function domain_chk()
+{
+	if($("#domain").val()=='')
+	{
+		alert('도메인을 입력하세요.');
+		$("#domain").focus();
+	}
+	else
+	{
+		window.open($("#domain").val());
+	}
+}
+</script>
+{/literal}
+
+<main class="content">
+	<div class="container-fluid p-0">
+
+		<h1 class="h3 mb-3">{$etc.board_title}</h1>
+
+		<div class="row">
+			<div class="col-12">
+				<div class="card">
+					<form name="writeform" method="post" action="{$smarty.server.SCRIPT_NAME}" enctype="multipart/form-data" onsubmit="return writeform_chk(this);">
+						<input type="hidden" name="menu" value="{$etc.menu}">
+						<input type="hidden" id="tn" name="tn" value="{$etc.tn}">
+						<input type="hidden" name="pagenum" value="{$etc.pagenum}">
+						<input type="hidden" name="search_select" value="{$etc.search_select}">
+						<input type="hidden" name="keyword" value="{$etc.keyword}">
+						<input type="hidden" name="idx" value="{$L.idx}">
+						<input type="hidden" name="mode" value="process">
+						<input type="hidden" name="modes" value="{$etc.modes}">
+
+						<div class="card-body row">
+							<div class="mb-3 col-lg-6">
+								<label for="title" class="form-label">일일 출석체크</label>
+								<input type="text" id="title" name="title" title="일일 출석체크" placeholder="일일 출석체크" value="{$L.title}" maxlength="55" class="form-control required isnum" />
+							</div>
+							<div class="mb-3 col-lg-6">
+								<label for="domain" class="form-label">좋아요(공감표시)</label>
+								<input type="text" id="domain" name="domain" title="좋아요(공감표시)" placeholder="좋아요(공감표시)" value="{$L.domain}" maxlength="55" class="form-control required isnum" />
+							</div>
+							<div class="mb-3 col-lg-6">
+								<label for="title" class="form-label">댓글 달기</label>
+								<input type="text" id="title" name="title" title="댓글 달기" placeholder="댓글 달기" value="{$L.title}" maxlength="55" class="form-control required isnum" />
+							</div>
+							<div class="mb-3 col-lg-6">
+								<label for="domain" class="form-label">리뷰 작성</label>
+								<input type="text" id="domain" name="domain" title="리뷰 작성" placeholder="리뷰 작성" value="{$L.domain}" maxlength="55" class="form-control required isnum" />
+							</div>
+							<div class="mb-3 col-lg-6">
+								<label for="title" class="form-label">게시글 업로드</label>
+								<input type="text" id="title" name="title" title="게시글 업로드" placeholder="게시글 업로드" value="{$L.title}" maxlength="55" class="form-control required isnum" />
+							</div>
+							<div class="mb-3 col-lg-6">
+								<label for="domain" class="form-label">회원 가입</label>
+								<input type="text" id="domain" name="domain" title="회원 가입" placeholder="회원 가입" value="{$L.domain}" maxlength="55" class="form-control required isnum" />
+							</div>
+							<div class="mb-3 col-lg-6">
+								<label for="title" class="form-label">뉴스레터 구독</label>
+								<input type="text" id="title" name="title" title="뉴스레터 구독" placeholder="뉴스레터 구독" value="{$L.title}" maxlength="55" class="form-control required isnum" />
+							</div>
+							<div class="mb-3 col-lg-6">
+								<label for="domain" class="form-label">스탬프 인증</label>
+								<input type="text" id="domain" name="domain" title="스탬프 인증" placeholder="스탬프 인증" value="{$L.domain}" maxlength="55" class="form-control required isnum" />
+							</div>
+							<div class="mb-3 col-lg-6">
+								<label for="domain" class="form-label">적용일</label>
+								<input type="text" id="target_date" name="target_date" value="" title="적용일" class="form-control flatpickr-minimum required" placeholder="Select date.." />
+							</div>
+						</div>
+						<div class="card-footer">
+							<div class="dataTables_wrapper dt-bootstrap5">
+								<div class="row">
+									<div class="col-sm-12 col-md-5">
+										<input type="button" value="목록" onclick="location.href='?menu={$etc.menu}&tn={$etc.tn}&mode=list&search_select={$etc.search_select}&keyword={$etc.keyword}&pagenum={$etc.pagenum}'" class=" btn btn-secondary" />
+										<button type="button" onclick="history.back();" class="btn btn-secondary"><i class="align-middle white" data-feather="x"></i> 취소</button>
+										<button type="submit" class="btn btn-primary"><i class="align-middle white" data-feather="save"></i> 저장</button>
+									</div>
+								</div>
+							</div>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+</main>
+
+{literal}
+<script>
+	document.addEventListener("DOMContentLoaded", function() {
+		// Flatpickr
+		flatpickr(".flatpickr-minimum");
+	});
+</script>
+{/literal}

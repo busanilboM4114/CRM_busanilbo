@@ -1,0 +1,40 @@
+.paging{
+}
+
+.paging .paging_button{
+	display:inline-block;
+	width:20px;
+	height:20px;
+	text-indent:-999999px;
+}
+
+.paging .first{
+	background:url('../../../img/paging_prev.png') no-repeat left 1px center;
+}
+
+.paging .prev{
+	background:url('../../../img/paging_prev.png') no-repeat left -19px center;
+	margin-right:6px;
+}
+
+.paging .next{
+	background:url('../../../img/paging_next.png') no-repeat left 0 center;
+	margin-left:6px;
+}
+
+.paging .last{
+	background:url('../../../img/paging_next.png') no-repeat left -20px center;
+}
+
+.paging .number{
+	display:inline-block;
+	height:16px;
+	padding:0 5px;
+	color:#555 !important;
+}
+
+.paging .on{
+	color:#3990df !important;
+	text-decoration:underline;
+	font-weight:bold;
+}

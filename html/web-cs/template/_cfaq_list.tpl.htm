@@ -1,0 +1,79 @@
+<div class="container">
+	<div class="title">
+		<h2 class="score-700 font-36">{$board_config.title}</h2>
+	</div>
+
+	<div class="board">
+		<div class="board-faq">
+			<ul>
+				{section name=i loop=$L}
+				<li>
+					<div class="acc row">
+						<div class="Question">Q.</div>
+						<div class="Qtxt col-sm-11 col-xs-10">
+							<h4>{$L[i].title}</h4>
+						</div>
+					</div>
+					<div class="acc_cont row">
+						<div class="Answer">A.</div>
+						<div class="Atxt col-sm-11 col-xs-10">
+							<p>{$L[i].contents}</p>
+						</div>
+					</div>
+					<div class="clear"></div>
+				</li>
+				{sectionelse}
+				<li>
+					<div class="acc row">
+						등록된 자료가 없습니다.
+					</div>
+				</li>
+				{/section}
+			</ul>
+		</div>
+	</div>
+	<div class="margin-t-50">
+		<div class="pagination">
+			<ul class="pagenum">
+				{$etc.pageclick}
+			</ul>
+		</div>
+	</div>
+	<div class="board-search margin-t-30 margin-b-100 center">
+		<form name="board-searchform" class="flex align-center justify-center" id="board-searchform">
+			<input type="hidden" name="board_idx" value="{$etc.board_idx}" />
+			<input type="hidden" name="search_select" value="all" />
+			<input name="keyword" id="keyword" type="text" class="text" value="{$etc.keyword}" title="검색어를 입력해 주세요">
+			<input type="submit" class="board-search-button" value="">
+		</form>
+	</div>
+</div>
+
+{literal}
+<script type="text/javascript">
+$(document).ready(function()
+{
+	var accordion_tab = $('.acc'), accordion_content = $('.acc_cont');
+
+	accordion_tab.on('click', function(e)
+	{
+		// Disable tab links
+		e.preventDefault();
+
+		// Remove the active class
+		accordion_tab.removeClass('active');
+
+		accordion_content.slideUp('normal');
+
+		if($(this).next().is(':hidden') == true)
+		{
+			$(this).addClass('active');
+			$(this).next().slideDown('normal');
+		}
+		else
+		{
+		}
+	});
+});
+</script>
+{/literal}

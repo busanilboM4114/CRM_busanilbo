@@ -1,0 +1,32 @@
+$(function(){
+	var gnbHr = $('.gnbHr');
+	gnbHr.find('>ul>li>ul').hide();
+	gnbHr.find('>ul>li>a')
+		.mouseover(function(){
+			gnbHr
+				.find('>ul>li>ul:visible')
+				.slideUp(200)
+				.parent('li')
+				.removeClass('active')
+				.find('>a')
+				.css('fontWeight','');
+			$(this)
+				.next('ul:hidden')
+				.slideDown(200)
+				.parent('li')
+				.addClass('active')
+				.find('>a')
+				.css('fontWeight','bold');
+		})
+		.focus(function(){
+			$(this).mouseover();
+		})
+		.end()
+		.mouseleave(function(){
+			gnbHr
+				.find('>ul>li>ul')
+				.slideUp(200)
+				.prev('a')
+				.css('fontWeight','');
+		});
+});

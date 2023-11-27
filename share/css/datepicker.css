@@ -1,0 +1,42 @@
+@charset 'utf-8';
+.ui-datepicker {width:100%;}
+.ui-state-default, .ui-widget-content .ui-state-default, .ui-widget-header .ui-state-default {background:none; border:none; border-radius:0;}
+.ui-widget-header, .ui-widget-content {background:none; border:none; border-radius:0;}
+.ui-datepicker td a, .ui-datepicker td span {text-align:center;}
+.ui-datepicker .ui-datepicker-prev span, .ui-datepicker .ui-datepicker-next span {position:static; margin:0; width:50px; height:50px;}
+.ui-icon-circle-triangle-e {background:url(/img/layout/calendar_next.png) center center / 100% no-repeat !important; background-size:100%;}
+.ui-icon-circle-triangle-w {background:url(/img/layout/calendar_prev.png) center center / 100% no-repeat !important; background-size:100%;}
+.ui-widget-header .ui-state-focus {background:none;}
+.ui-state-hover,
+.ui-widget-content .ui-state-hover,
+.ui-widget-header .ui-state-hover,
+.ui-state-focus,
+.ui-widget-content .ui-state-focus,
+.ui-widget-header .ui-state-focus {background:none; border:none;}
+.ui-datepicker .ui-datepicker-next {width:auto; height:auto; cursor:pointer;}
+.ui-datepicker .ui-datepicker-prev {width:auto; height:auto; cursor:pointer;}
+.ui-datepicker .ui-datepicker-next-hover {right:2px; top:2px; width:auto; height:auto;}
+.ui-datepicker .ui-datepicker-prev-hover {left:2px; top:2px; width:auto; height:auto;}
+.ui-datepicker .ui-datepicker-title {font-size:40px; line-height:1em; font-weight:300; }
+.ui-datepicker .ui-datepicker-title span {font-family:'Montserrat', 'NotoSans', sans-serif;}
+.ui-datepicker .ui-datepicker-header {margin-bottom:30px;}
+.ui-datepicker th {border-bottom:1px solid #222;}
+.ui-datepicker td span, .ui-datepicker td a, .ui-state-default, .ui-widget-content .ui-state-default, .ui-widget-header .ui-state-default {display:inline-block; line-height:49px; padding:0; width:50px; height:50px; border-radius:100%; border:1px solid transparent;}
+.ui-datepicker td:hover a {background:#fe6666 !important; color:#fff !important;}
+.ui-state-default.ui-state-active {background:#fe6666; color:#fff !important;}
+.ui-datepicker td {padding:5px 0; cursor:pointer;}
+.ui-datepicker-week-end:first-child, .ui-datepicker-week-end:first-child a {color:#fe6666;}
+.ui-datepicker-today a {border:1px solid #fe6666 !important;}
+
+@media(max-width:1499px)
+{
+}
+
+@media(max-width:991px)
+{
+}
+
+@media(max-width:767px)
+{
+	.ui-datepicker td span, .ui-datepicker td a, .ui-state-default, .ui-widget-content .ui-state-default, .ui-widget-header .ui-state-default {width:25px; height:25px; line-height:24px;}
+}
